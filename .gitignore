@@ -11,6 +11,8 @@ SWAzamServer/.classpath
 SWAzamServer/.project
 SWAzamServer/.settings
 
+.metadata
+
 # ignore fingerprint libs
 
 fingerprint.jar
