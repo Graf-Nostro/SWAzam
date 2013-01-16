@@ -9,16 +9,12 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-<<<<<<< HEAD
 	<classpathentry kind="lib" path="vendor/fingerprint-0.1-javadoc.jar"/>
 	<classpathentry kind="lib" path="vendor/fingerprint.jar"/>
 	<classpathentry kind="lib" path="vendor/jtransforms-2.4.jar"/>
-=======
-	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/fingerprint.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/fingerprint-0.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/jtransforms-2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/jtransforms-2.4-doc.zip"/>
->>>>>>> 0181fd2625135ad9c9b0965f89da06473641ceb7
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="vendor/gson-2.2.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="vendor/gson-2.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="vendor/gson-2.2.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
