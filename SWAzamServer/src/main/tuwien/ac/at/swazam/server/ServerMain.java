@@ -21,12 +21,10 @@ public class ServerMain {
 		// this uses h2 by default but change to match your database
         String databaseUrl = "jdbc:sqlite:user";
         // create a connection source to our database
-        ConnectionSource connectionSource =
-        		new JdbcConnectionSource(databaseUrl);
+        ConnectionSource connectionSource = new JdbcConnectionSource(databaseUrl);
 
         // instantiate the dao
-        Dao<User, String> userDao =
-            DaoManager.createDao(connectionSource, User.class);
+        Dao<User, String> userDao = DaoManager.createDao(connectionSource, User.class);
 
         // if you need to create the 'accounts' table make this call
         TableUtils.createTable(connectionSource, User.class);
