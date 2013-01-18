@@ -3,9 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/fingerprint.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/fingerprint-0.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/jtransforms-2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/jtransforms-2.4-doc.zip"/>
+	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/fingerprint.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/fingerprint-0.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/jtransforms-2.4.jar"/>
+	<classpathentry kind="lib" path="vendor/miglayout15-swing.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

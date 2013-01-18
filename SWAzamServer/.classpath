@@ -9,12 +9,15 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="vendor/fingerprint-0.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="vendor/fingerprint.jar"/>
-	<classpathentry kind="lib" path="vendor/jtransforms-2.4.jar"/>
-	<classpathentry kind="lib" path="vendor/ormlite-core-4.42.jar"/>
-	<classpathentry kind="lib" path="vendor/ormlite-jdbc-4.42.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="vendor/sqlite-jdbc-3.7.15.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/fingerprint.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/fingerprint-0.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/ormlite-core-4.42.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/ormlite-jdbc-4.42.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/sqlite-jdbc-3.7.15.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
