@@ -20,11 +20,11 @@
     </noscript>
 	
 	<div style="text-align:center; width:100%;">
-		<form id="login" action="RESTUserManagement_URL">
+		<form id="login" action="register" method="post">
 		    <h1>SWAZAM Register</h1>
 		    <fieldset id="inputs">
-		        <label>Username: </label><input id="username" type="text" placeholder="Username" autofocus required>   
-		        <label>Passwort: </label><input id="password" type="password" placeholder="Password" required>
+		        <label>Username: </label><input id="username" type="text" name="name" placeholder="Username" autofocus required>   
+		        <label>Passwort: </label><input id="password" type="password" name="passwd" placeholder="Password" required>
 		    </fieldset>
 		    <fieldset id="actions">
 		        <input type="submit" id="submit" value="Submit">

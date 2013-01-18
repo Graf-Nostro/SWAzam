@@ -14,10 +14,15 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/fingerprint.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/fingerprint-0.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/ormlite-core-4.42.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/ormlite-jdbc-4.42.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Andreas/Dropbox/uni/SWA/lab2/SWAzam/sqlite-jdbc-3.7.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/fingerprint.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/fingerprint-0.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/gson-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/gson-2.2.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/gson-2.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/jtransforms-2.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/ormlite-core-4.42.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/ormlite-jdbc-4.42.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/sqlite-jdbc-3.7.15.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Kung/Desktop/TU WIEN/MASTER/software architecture/workspace/SWAzam/SWAzamServer/WebContent/WEB-INF/lib/jstl-1.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
