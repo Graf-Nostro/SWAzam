@@ -27,10 +27,19 @@ public class RESTUserManagement {
 	
 	@POST
 	@Path("login")
-	public Viewable login(@Context HttpServletRequest request) {
+	public Viewable login(@Context HttpServletRequest request, @FormParam("name") String name, @FormParam("passwd") String passwd) {
 		// DO LOGIN
+		boolean loggedIn = false;
+		try {
+			user = new CoreUserManagement();
+			if ( user.checkLogin(name, passwd) ) {
+				request.setAttribute("obj", new String("Logged in as " + name));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		request.setAttribute("obj", new String("IT Works"));
 		System.out.println("/LOGIN called");
 		return new Viewable("/index.jsp", null);
 	}
@@ -41,7 +50,7 @@ public class RESTUserManagement {
 		// DO REGISTER
 		try {
 			user = new CoreUserManagement();
-			//user.createUser(name, passwd);
+			user.createUser(name, passwd);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
