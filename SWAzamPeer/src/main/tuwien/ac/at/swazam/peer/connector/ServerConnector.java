@@ -65,7 +65,7 @@ public class ServerConnector {
 		try {
 			Gson gson = new Gson();
 			Response response = rest.put(new URL(serverURL + "/RESTPeerManagement/register"), gson.toJson(peer));
-			if (response.getCode() != 200) {
+			if (response.getCode() >= 300) {
 				throw new ServerNotAvailableException();
 			}
 		} catch (MalformedURLException e) {

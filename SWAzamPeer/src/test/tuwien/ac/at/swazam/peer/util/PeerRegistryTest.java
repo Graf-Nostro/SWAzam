@@ -21,7 +21,7 @@ public class PeerRegistryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		peerRegistry = new PeerRegistry(new ServerConnector());
+		peerRegistry = new PeerRegistry(ServerConnector.getInstance());
 	}
 
 	@After
