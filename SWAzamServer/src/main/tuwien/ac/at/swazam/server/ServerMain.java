@@ -27,17 +27,17 @@ public class ServerMain {
         Dao<User, String> userDao = DaoManager.createDao(connectionSource, User.class);
 
         // if you need to create the 'accounts' table make this call
-        TableUtils.createTable(connectionSource, User.class);
+        TableUtils.createTableIfNotExists(connectionSource, User.class);
 
         // create an instance of Account
         User user = new User();
         user.setName("Jim Coakley");
 
         // persist the account object to the database
-        userDao.create(user);
+        userDao.createIfNotExists(user);
 
         // retrieve the account from the database by its id field (name)
-        User user2 = userDao.queryForId("1");
+        User user2 = userDao.queryForId("Jim Coakley");
         System.out.println("User: " + user2.getName());
 
         // close the connection source

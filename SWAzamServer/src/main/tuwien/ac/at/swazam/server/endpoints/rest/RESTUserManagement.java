@@ -16,7 +16,7 @@ import com.sun.jersey.api.view.Viewable;
 @Path("/")
 @Produces(MediaType.TEXT_HTML)
 public class RESTUserManagement {
-	
+	CoreUserManagement user;
 	@GET
 	@Path("index")
 	public Viewable index(@Context HttpServletRequest request) {
@@ -40,7 +40,7 @@ public class RESTUserManagement {
 	public Viewable register(@FormParam("name") String name, @FormParam("passwd") String passwd) {
 		// DO REGISTER
 		try {
-			CoreUserManagement user = new CoreUserManagement();
+			user = new CoreUserManagement();
 			//user.createUser(name, passwd);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
