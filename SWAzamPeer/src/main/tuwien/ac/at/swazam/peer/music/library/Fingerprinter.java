@@ -133,4 +133,14 @@ public class Fingerprinter {
 		//this code is never reached
 		return null;
 	}
+
+	public String matchFingerprintToLibrary(final Fingerprint fp){
+		/**
+		 * DEGUB MOCKUP 
+		 */
+		
+		if( library.containsValue(fp) ) return "YES";
+		else return "NO";
+	}
+
 }
