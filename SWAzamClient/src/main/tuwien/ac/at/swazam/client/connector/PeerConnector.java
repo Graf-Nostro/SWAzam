@@ -5,7 +5,7 @@ import java.io.IOException;
 public class PeerConnector implements IPeerConnector {
 
 	@Override
-	public void sendFingerprint() throws IOException {
+	public void sendRequest() throws IOException {
 		// TODO Auto-generated method stub
 		
 	}
