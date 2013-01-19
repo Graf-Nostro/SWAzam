@@ -1,10 +1,5 @@
 package main.tuwien.ac.at.swazam.util;
 
-/**
- * Response
- * 
- * @author Florian Eckerstorfer <florian@eckerstorfer.co>
- */
 public class Response {
 	private Integer code;
 	private String message;

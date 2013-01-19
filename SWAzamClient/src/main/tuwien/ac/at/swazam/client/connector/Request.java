@@ -1,55 +1,66 @@
 package main.tuwien.ac.at.swazam.client.connector;
 
+import main.tuwien.ac.at.swazam.client.utils.ClientUtils;
+import ac.at.tuwien.infosys.swa.audio.Fingerprint;
+
 public class Request {
-	private Integer code;
-	private String message;
-	private String body;
 	
-	public Request() {
+	private String ip;
+	private int port;
+	private Fingerprint fingerprint;
+	
+	
+	public Request(Fingerprint fp) {
+		this(ClientUtils.getIp(), ClientUtils.getPort(), fp);
 	}
 	
-	public Request(Integer code) {
-		this(code, null);
+	public Request(String ip, int port, Fingerprint fp) {
+		this.ip = ip;
+		this.port = port;
+		this.fingerprint = fp;
+	}
+
+	/**
+	 * @return the ip
+	 */
+	public String getIp() {
+		return ip;
+	}
+
+	/**
+	 * @param ip the ip to set
+	 */
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
+	/**
+	 * @return the port
+	 */
+	public int getPort() {
+		return port;
+	}
+
+	/**
+	 * @param port the port to set
+	 */
+	public void setPort(int port) {
+		this.port = port;
+	}
+
+	/**
+	 * @return the fingerprint
+	 */
+	public Fingerprint getFingerprint() {
+		return fingerprint;
+	}
+
+	/**
+	 * @param fingerprint the fingerprint to set
+	 */
+	public void setFingerprint(Fingerprint fingerprint) {
+		this.fingerprint = fingerprint;
 	}
 	
-	public Request(String message) {
-		this(null, message);
-	}
-	
-	public Request(Integer code, String message) {
-		this(code, message, null);
-	}
-	
-	public Request(Integer code, String message, String body) {
-		setCode(code);
-		setMessage(message);
-		setBody(body);
-	}
-	
-	public Request setCode(Integer code) {
-		this.code = code;
-		return this;
-	}
-	
-	public Integer getCode() {
-		return code;
-	}
-	
-	public Request setMessage(String message) {
-		this.message = message;
-		return this;
-	}
-	
-	public String getMessage() {
-		return message;
-	}
-	
-	public Request setBody(String body) {
-		this.body = body;
-		return this;
-	}
-	
-	public String getBody() {
-		return body;
-	}
+
 }

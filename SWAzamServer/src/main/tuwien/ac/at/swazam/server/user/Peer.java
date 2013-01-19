@@ -1,105 +1,67 @@
 package main.tuwien.ac.at.swazam.server.user;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
+@DatabaseTable(tableName = "peer")
 public class Peer {
 	
-	private String ip;
-	private Integer port;
-	private String name;
+	public static final String NAME_FIELD_NAME = "name";
+	public static final String IP_FIELD_NAME = "ip";
+	public static final String PORT_FIELD_NAME = "port";
+		
+	@DatabaseField(columnName = NAME_FIELD_NAME, canBeNull = false, id = true)
+	private	String name = "";
 	
-	public Peer() {
+	@DatabaseField(columnName = IP_FIELD_NAME, canBeNull = false)
+	private	String ip = "";
+
+	@DatabaseField(columnName = PORT_FIELD_NAME)
+	private Integer port = 0;
+	
+	public Peer() { 
 	}
 	
-	/**
-	 * Initializes a peer only with its name.
-	 * 
-	 * @param name 
-	 */
-	public Peer(String name) {
-		setName(name);
-	}
-	
-	/**
-	 * Initializes a peer with IP address and port.
-	 * 
-	 * @param ip
-	 * @param port
-	 */
-	public Peer(String ip, Integer port) {
-		setIp(ip);
-		setPort(port);
-	}
-	
-	/**
-	 * Initializes a peer with name, IP address and port.
-	 * 
-	 * @param name
-	 * @param ip
-	 * @param port
-	 */
 	public Peer(String name, String ip, Integer port) {
-		setName(name);
-		setIp(ip);
-		setPort(port);
-	}
-	
-	/**
-	 * Sets the name.
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public Peer setName(String name) {
 		this.name = name;
-		return this;
-	}
-	
-	/**
-	 * Sets the IP address.
-	 * 
-	 * @param ip
-	 * @return
-	 */
-	public Peer setIp(String ip) {
 		this.ip = ip;
-		return this;
-	}
-	
-	/**
-	 * Sets the port.
-	 * 
-	 * @param port
-	 * @return
-	 */
-	public Peer setPort(Integer port) {
 		this.port = port;
-		return this;
 	}
 	
-	/**
-	 * Returns the name.
-	 * 
-	 * @return
-	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
 		return name;
 	}
 	
-	/**
-	 * Returns the IP address.
-	 * 
-	 * @return
-	 */
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+
 	public String getIp() {
 		return ip;
 	}
 	
-	/**
-	 * Returns the port.
-	 * 
-	 * @return
-	 */
+	public void setPort(Integer port) {
+		this.port = port;
+	}
+
 	public Integer getPort() {
 		return port;
+	}
+
+	@Override
+	public int hashCode() {
+		return name.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == null || other.getClass() != getClass()) {
+			return false;
+		}
+		return name.equals(((Peer) other).name);
 	}
 }

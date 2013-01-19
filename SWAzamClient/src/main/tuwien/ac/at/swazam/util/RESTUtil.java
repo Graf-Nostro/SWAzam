@@ -8,36 +8,17 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * RESTUtil
- * 
- * @author Florian Eckerstorfer <florian@eckerstorfer.co>
- */
 public class RESTUtil {
 	
-	public Response get(URL url) throws IOException {
-		return execute(url, "GET");
-	}
-	
 	public Response put(URL url, String content) throws IOException {
-		return execute(url, "PUT", content);
-	}
-	
-	protected Response execute(URL url, String method) throws IOException {
-		return execute(url, method, null);
-	}
-	
-	protected Response execute(URL url, String method, String content) throws IOException {
 		HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
 		httpCon.setDoInput(true);
 		httpCon.setDoOutput(true);
-		httpCon.setRequestMethod(method);
+		httpCon.setRequestMethod("PUT");
 		
-		if ((method == "PUT" || method == "POST") && content != null) {
-			OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
-			out.write(content);
-			out.close();
-		}
+		OutputStreamWriter out = new OutputStreamWriter(httpCon.getOutputStream());
+		out.write(content);
+		out.close();
 		
 		httpCon.connect();
 		
@@ -49,12 +30,12 @@ public class RESTUtil {
 		}
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-		String line = reader.readLine();
+		String line = null;
 		String body = "";
-		while (line != null) {
-			body = body + line;
+		do {
 			line = reader.readLine();
-		}
+			body = body + line;
+		} while(line != null);
 		
 		return createResponse(httpCon.getResponseCode(), httpCon.getResponseMessage(), body);
 	}
