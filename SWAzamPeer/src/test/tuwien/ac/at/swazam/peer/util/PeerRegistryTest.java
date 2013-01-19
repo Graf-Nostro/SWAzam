@@ -2,6 +2,7 @@ package test.tuwien.ac.at.swazam.peer.util;
 
 import static org.junit.Assert.*;
 
+import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.peer.util.PeerRegistry;
 
@@ -20,7 +21,7 @@ public class PeerRegistryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		peerRegistry = new PeerRegistry();
+		peerRegistry = new PeerRegistry(new ServerConnector());
 	}
 
 	@After

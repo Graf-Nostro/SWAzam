@@ -3,6 +3,7 @@ package main.tuwien.ac.at.swazam.peer.connector;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 
 import com.google.gson.Gson;
 
@@ -12,12 +13,21 @@ import main.tuwien.ac.at.swazam.util.Response;
 
 public class ServerConnector {
 	
-	private String serverURL; 
+	private static ServerConnector instance;
 	
-	public ServerConnector() {
+	public static ServerConnector getInstance() {
+		if (null == instance) {
+			instance = new ServerConnector();
+		}
+		return instance;
 	}
 	
-	public ServerConnector(String serverURL) {
+	private String serverURL; 
+	
+	private ServerConnector() {
+	}
+	
+	private ServerConnector(String serverURL) {
 		setServerURL(serverURL);
 	}
 	
@@ -28,6 +38,25 @@ public class ServerConnector {
 	
 	public String getServerURL() {
 		return serverURL;
+	}
+	
+	public ArrayList<Peer> getPeers() throws ServerNotAvailableException {
+		RESTUtil rest = new RESTUtil();
+		
+		try {
+			Response response = rest.get(new URL(serverURL + "/RESTPeerManagement/peers"));
+			if (response.getCode() >= 300) {
+				throw new ServerNotAvailableException();
+			}
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		ArrayList<Peer> result = new ArrayList<Peer>();
+		// TODO: Parse result and add to array
+		return result;
 	}
 
 	public Boolean register(Peer peer) throws ServerNotAvailableException {
