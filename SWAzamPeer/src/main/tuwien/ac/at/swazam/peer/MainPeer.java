@@ -18,7 +18,7 @@ public class MainPeer {
 		Fingerprinter fp = new Fingerprinter("");
 		
 		try {
-			String filename = "feist-01.wav";
+			String filename = "f01.wav";
 			//String sample   = "sample-01.wav";
 			
 			String path = System.getProperty("user.dir")+"/library/";
