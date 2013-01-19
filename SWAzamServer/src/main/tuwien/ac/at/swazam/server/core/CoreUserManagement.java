@@ -2,7 +2,7 @@ package main.tuwien.ac.at.swazam.server.core;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
@@ -17,8 +17,8 @@ public class CoreUserManagement {
 	private final Logger LOG = Logger.getLogger(CoreUserManagement.class.getName());
 	private final static String DATABASE_URL = "jdbc:sqlite:user";
 	
-	private Dao<User, String> userDao = null;
-	private Dao<SongRequest, Integer> songDao = null;
+	private Dao<User, String> userDao;
+	private Dao<SongRequest, Integer> songDao;
 	
 	/***** CONSTRUCTOR CASE HANDLING
 	 * @throws Exception ********/
@@ -37,8 +37,9 @@ public class CoreUserManagement {
 	public CoreUserManagement(String username, String password) throws Exception {
 	}
 	
+	
 	private void doMain() throws Exception {
-		JdbcConnectionSource connectionSource = null;
+		JdbcPooledConnectionSource connectionSource = null;
 		try {
 			/* create our data source
 			 * New connections are created on demand only if there are no dormant connections
@@ -46,21 +47,24 @@ public class CoreUserManagement {
 			 * threads. It has settings for the maximum number of free connections before they are closed
 			 * as well as a maximum age before a connection is closed. 
 			 */
-			connectionSource = new JdbcConnectionSource(DATABASE_URL);
+			connectionSource = new JdbcPooledConnectionSource(DATABASE_URL);
 			// setup our database and DAOs
 			setupDatabase(connectionSource);
 			//userDao = DaoManager.lookupDao(connectionSource, User.class);
 			//songDao = DaoManager.lookupDao(connectionSource, SongRequest.class);
-			if (userDao == null) userDao = DaoManager.createDao(connectionSource, User.class);
-			if (songDao == null) songDao = DaoManager.createDao(connectionSource, SongRequest.class);
+			userDao = DaoManager.createDao(connectionSource, User.class);
+			songDao = DaoManager.createDao(connectionSource, SongRequest.class);
 			
 			LOG.info("\n\nDatabase Connection seems to have worked\n\n");
-		} finally {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		/*finally {
 			// destroy the data source which should close underlying connections
 			if (connectionSource != null) {
 				connectionSource.close();
 			}
-		}
+		}*/
 	}
 	
 	/**
@@ -73,11 +77,10 @@ public class CoreUserManagement {
 	}
 	
 	public boolean createUser(String username, String password) {
-		// TODO: Check if user exists before ?
 		User user = new User(username, new String(Base64.encode(password.getBytes())));
 		// persist the account object to the database
         try {
-			userDao.create(user);
+			userDao.createIfNotExists(user);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			LOG.warning(e.toString());
