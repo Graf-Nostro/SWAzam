@@ -23,6 +23,10 @@ public class PeerConnector {
 	}
 		
 	public Boolean peerStatus(Peer peer) {
+		if (peer == null) {
+			return new Boolean(false);
+		}
+		
 		RESTUtil rest = new RESTUtil();
 		Response response = null;
 		
