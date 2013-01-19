@@ -26,19 +26,20 @@ public class Fingerprinter {
 	  
 	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter");
 	
-	private Map<Fingerprint, String> library = new HashMap<Fingerprint, String>();
-	private final LibrarySerializer libS = new LibrarySerializer();
+	private Map<Fingerprint, String> map = new HashMap<Fingerprint, String>();
+	private final LibrarySerializer libS;
+	private final Library			library;
 	
-	public Fingerprinter(String path){
-		if(path == null || path.equals("")){
-			path = System.getProperty("user.dir")+"/library/";
-		}
+	public Fingerprinter(final Library library){	
+		this.library = library;
+		libS = new LibrarySerializer(library);
 		
-		LibraryThread th = new LibraryThread(path);
+		LibraryThread th = new LibraryThread(library);
 		th.start();
-
+		
 		//load in file
-		if(new File(path + "Library.dat").exists()) library = libS.deserializeMap();		
+		if( new File( library.getPath() + library.getLibName() ).exists() ) map = libS.deserializeMap();
+		else th.run();
 	}
 	
 	/**
@@ -62,9 +63,17 @@ public class Fingerprinter {
 	 * @return filename or No match found
 	 */
 	public String matchFingerprintToLibrary(final Fingerprint fp){		
-		logger.log(Level.INFO, "Search for file");
+		logger.log(Level.INFO, "Searching for file");
 		
-		if(library.containsKey(fp)) return library.get(fp);
-		else 						return "No match found";
+		//load in file
+		if( new File( library.getPath() + library.getLibName() ).exists() ) map = libS.deserializeMap();
+		
+		if(map.containsKey(fp)) {
+			logger.log(Level.INFO, "Found one!");
+			return map.get(fp);
+		} else {
+			logger.log(Level.INFO, "Found none!");
+			return "No match found";
+		}
 	}
 }

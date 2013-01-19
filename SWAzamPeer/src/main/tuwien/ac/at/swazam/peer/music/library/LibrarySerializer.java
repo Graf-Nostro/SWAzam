@@ -28,21 +28,21 @@ public class LibrarySerializer implements Serializable {
 
 	private static Logger logger = Logger.getLogger("ac.at.tuwien.swazam.peer.music.library.LibrarySerializer");
 	
-	private final String LIBRARY_NAME = System.getProperty("user.dir") + "/library/Library.dat";
+	private String LIBRARY_NAME;
 	
-	public LibrarySerializer(){}
+	public LibrarySerializer(final Library library){
+		LIBRARY_NAME = library.getPath() + library.getPeer().getName() + "Library.dat";
+	}
 
 	/**
 	 * serialize map and save it to file
 	 */
-	public void serializeMap(final Map<Fingerprint, String> map){		 
-	    try {  		    	
+	public void serializeMap(final Map<Fingerprint, String> map){		 		
+		try {
 	    	FileOutputStream fos = new FileOutputStream(LIBRARY_NAME);
 	    	ObjectOutputStream oos = new ObjectOutputStream(fos);
 	    	oos.writeObject(map);
 	    	oos.close();
-
-	    	logger.log(Level.INFO, map.toString());
 	    	
 	    	fos.close();	      
 	    } catch(IOException e) { 
@@ -58,7 +58,7 @@ public class LibrarySerializer implements Serializable {
 	 * @return Fingerprint HashMap
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<Fingerprint, String> deserializeMap(){
+	public Map<Fingerprint, String> deserializeMap(){		
 		Map<Fingerprint, String> deSerMap = null;
 		
 		try {
