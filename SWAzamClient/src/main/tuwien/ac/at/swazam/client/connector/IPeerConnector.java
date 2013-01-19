@@ -4,5 +4,5 @@ import java.io.IOException;
 
 public interface IPeerConnector {
 	
-	void sendFingerprint() throws IOException;
+	void sendRequest() throws IOException;
 }
