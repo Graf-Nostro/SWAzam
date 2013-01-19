@@ -1,26 +1,29 @@
 package main.tuwien.ac.at.swazam.peer;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
+=======
+>>>>>>> b922fb0a97116e3581f5d6320523fd8d87bff5ed
 import java.util.logging.Logger;
-
-import javax.sound.sampled.UnsupportedAudioFileException;
-
-import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
 import main.tuwien.ac.at.swazam.peer.connector.ServerNotAvailableException;
-import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
-import main.tuwien.ac.at.swazam.peer.music.library.NoSuchFileInMusicLibrary;
+
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 
 public class MainPeer {
 	
+	@SuppressWarnings("unused")
 	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.MainPeer");
 	public static Peer peer;
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> b922fb0a97116e3581f5d6320523fd8d87bff5ed
 		if (args.length < 1) {
 			System.out.println("Missing peer name.");
 			System.exit(-1);
@@ -41,6 +44,7 @@ public class MainPeer {
 			System.out.println("Could not register peer at server.");
 			e.printStackTrace();
 		}
+<<<<<<< HEAD
 		
 		/*
 		//TODO make a junit testcase out of it
@@ -75,6 +79,7 @@ public class MainPeer {
 		}
 		*/
 		//made testcase FingerprinterTest
+=======
+>>>>>>> b922fb0a97116e3581f5d6320523fd8d87bff5ed
 	}
-	
 }

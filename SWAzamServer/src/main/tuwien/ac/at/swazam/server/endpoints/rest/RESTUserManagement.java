@@ -10,6 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import main.tuwien.ac.at.swazam.server.core.CoreUserManagement;
+import main.tuwien.ac.at.swazam.server.user.User;
 
 import com.sun.jersey.api.view.Viewable;
 
@@ -28,20 +29,22 @@ public class RESTUserManagement {
 	@POST
 	@Path("login")
 	public Viewable login(@Context HttpServletRequest request, @FormParam("name") String name, @FormParam("passwd") String passwd) {
+		System.out.println("/LOGIN called");
 		// DO LOGIN
-		boolean loggedIn = false;
 		try {
-			user = new CoreUserManagement();
+			user = new CoreUserManagement(); 
 			if ( user.checkLogin(name, passwd) ) {
-				request.setAttribute("obj", new String("Logged in as " + name));
+				request.setAttribute("name", new String(name));
+				request.setAttribute("coins", user.getUserbyId(name).getCoins().toString());
+				//request.setAttribute("songrequests", user.getUserbyId(name).getSongRequests());
+				
+				return new Viewable("/index.jsp", null);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println("/LOGIN called");
-		return new Viewable("/index.jsp", null);
+		return new Viewable("/../../index.html", null);
 	}
 	
 	@POST

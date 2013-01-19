@@ -9,7 +9,6 @@ import java.io.IOException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
-import main.tuwien.ac.at.swazam.peer.music.library.NoSuchFileInMusicLibrary;
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,7 +21,6 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 public class FingerprinterTest {
 
 	private final String FILE_NAME = "f01small.wav";
-	private final double result_expected_1 = 0.0;
 	private Fingerprinter fprinter;	
 	
 	private final String PATH = System.getProperty("user.dir")+"/library/";
@@ -42,36 +40,12 @@ public class FingerprinterTest {
 	}
 	
 	@Test
-	public void findMusic() {
-		try {
-			Fingerprint fpRaw    = Fingerprinter.getFingerprint(file);
-			Fingerprint fpMapped = fprinter.loadFingerprintFromMap(FILE_NAME);
-			
-			double result = fpRaw.match(fpMapped);
-
-			assertEquals(result_expected_1, result, 0.0);
-			
-			
-		} catch (NoSuchFileInMusicLibrary e) {
-			assertFalse(true);
-		} catch (IOException e) {
-			assertFalse(true);
-		} catch (UnsupportedAudioFileException e) {
-			assertFalse(true);
-		}
-	}
-	
-	@Test
-	public void findMatchToFingerprintTest(){
-		/**
-		 * MOCKUP TEST	
-		 */
-		
+	public void findMatchToFingerprintTest(){		
 		try {
 			Fingerprint fpRaw = Fingerprinter.getFingerprint(file);
 			String result	  = fprinter.matchFingerprintToLibrary(fpRaw);	
 			
-			assertEquals("YES", result);
+			assertEquals(FILE_NAME, result);
 			
 		} catch (IOException e) {
 			assertFalse(true);
@@ -82,10 +56,6 @@ public class FingerprinterTest {
 	
 	@Test
 	public void findMatchToFingerprintwithJsonEncodingTest(){
-		/**
-		 * MOCKUP TEST	
-		 */
-		
 		try {
 			Fingerprint fpRaw = Fingerprinter.getFingerprint(file);
 			
@@ -95,7 +65,7 @@ public class FingerprinterTest {
 			
 			String result = fprinter.matchFingerprintToLibrary(fp);	
 			
-			assertEquals("YES", result);
+			assertEquals(FILE_NAME, result);
 			
 		} catch (IOException e) {
 			assertFalse(true);

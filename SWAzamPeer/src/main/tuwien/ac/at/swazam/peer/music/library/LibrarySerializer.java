@@ -35,7 +35,7 @@ public class LibrarySerializer implements Serializable {
 	/**
 	 * serialize map and save it to file
 	 */
-	public void serializeMap(final Map<String, Fingerprint> map){		 
+	public void serializeMap(final Map<Fingerprint, String> map){		 
 	    try {  		    	
 	    	FileOutputStream fos = new FileOutputStream(LIBRARY_NAME);
 	    	ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -58,14 +58,14 @@ public class LibrarySerializer implements Serializable {
 	 * @return Fingerprint HashMap
 	 */
 	@SuppressWarnings("unchecked")
-	public Map<String, Fingerprint> deserializeMap(){
-		Map<String, Fingerprint> deSerMap = null;
+	public Map<Fingerprint, String> deserializeMap(){
+		Map<Fingerprint, String> deSerMap = null;
 		
 		try {
 			FileInputStream fis = new FileInputStream(LIBRARY_NAME);
 			ObjectInputStream ois = new ObjectInputStream(fis);
 			
-			deSerMap = (Map<String, Fingerprint>) ois.readObject();
+			deSerMap = (Map<Fingerprint, String>) ois.readObject();
 			ois.close();
 		
 			logger.log(Level.FINE, deSerMap.toString());
