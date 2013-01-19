@@ -12,5 +12,7 @@
 	<classpathentry kind="lib" path="/home/user/Programmieren/workspace/SWAzam/ormlite-core-4.42.jar"/>
 	<classpathentry kind="lib" path="/home/user/Programmieren/workspace/SWAzam/ormlite-jdbc-4.42.jar"/>
 	<classpathentry kind="lib" path="/home/user/Programmieren/workspace/SWAzam/sqlite-jdbc-3.7.15.jar"/>
+	<classpathentry kind="lib" path="/home/user/Programmieren/workspace/SWAzam/jersey-bundle-1.17.jar"/>
+	<classpathentry kind="lib" path="/home/user/Programmieren/workspace/SWAzam/javax.servlet-3.1.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
