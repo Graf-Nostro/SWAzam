@@ -13,27 +13,7 @@ public class Peer {
 	
 	public Peer() {
 	}
-	
-	/**
-	 * Initializes a peer only with its name.
-	 * 
-	 * @param name 
-	 */
-	public Peer(String name) {
-		setName(name);
-	}
-	
-	/**
-	 * Initializes a peer with IP address and port.
-	 * 
-	 * @param ip
-	 * @param port
-	 */
-	public Peer(String ip, Integer port) {
-		setIp(ip);
-		setPort(port);
-	}
-	
+		
 	/**
 	 * Initializes a peer with name, IP address and port.
 	 * 

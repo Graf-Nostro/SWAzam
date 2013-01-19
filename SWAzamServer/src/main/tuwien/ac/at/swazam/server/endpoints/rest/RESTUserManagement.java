@@ -5,6 +5,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -13,6 +14,7 @@ import main.tuwien.ac.at.swazam.server.core.CoreUserManagement;
 import main.tuwien.ac.at.swazam.server.user.User;
 
 import com.sun.jersey.api.view.Viewable;
+import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
 @Path("/")
 @Produces(MediaType.TEXT_HTML)
@@ -29,7 +31,7 @@ public class RESTUserManagement {
 	@POST
 	@Path("login")
 	public Viewable login(@Context HttpServletRequest request, @FormParam("name") String name, @FormParam("passwd") String passwd) {
-		System.out.println("/LOGIN called");
+		System.out.println("/LOGIN called " + name +" " + passwd);
 		// DO LOGIN
 		try {
 			user = new CoreUserManagement(); 
@@ -44,7 +46,7 @@ public class RESTUserManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new Viewable("/../../index.html", null);
+		return new Viewable("/../../welcome-file.jsp", null);
 	}
 	
 	@POST
@@ -62,6 +64,47 @@ public class RESTUserManagement {
 		//request.setAttribute("obj", new String("IT Works"));
 		System.out.println("/REGISTER called with " + name + " and " + passwd);
 		
-		return new Viewable("/../../index.html", null);
+		return new Viewable("/../../welcome-file.jsp", null);
+	}
+	
+	@POST
+	@Path("/update/{oldname}")
+	public Viewable update(@PathParam("oldname") String oldname, @FormParam("name") String name, @FormParam("oldpasswd") String oldpasswd, @FormParam("newpasswd") String newpasswd) {
+		try {
+			user = new CoreUserManagement();
+			if (user.getUserbyId(oldname).getPassword().equals(new String(Base64.encode(oldpasswd.getBytes())))) {
+				User usr = user.getUserbyId(oldname);
+				usr.setName(name);
+				usr.setPassword(new String(Base64.encode(newpasswd.getBytes())));
+				user.updateUser(usr);
+			}	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//request.setAttribute("obj", new String("IT Works"));
+		System.out.println("/update called with " + name + " and " + newpasswd);
+		
+		return new Viewable("/../../welcome-file.jsp", null);
+	}
+	
+	@POST
+	@Path("/delete/{pathname}")
+	public Viewable delete(@PathParam("pathname") String name, @FormParam("name") String hiddenname) {
+		try {
+			user = new CoreUserManagement();
+			if (hiddenname.equals(name)) {
+				user.deleteUser(name);
+			}	
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//request.setAttribute("obj", new String("IT Works"));
+		System.out.println("/delete called with " + name + " and " + hiddenname);
+		
+		return new Viewable("/../../welcome-file.jsp", null);
 	}
 }

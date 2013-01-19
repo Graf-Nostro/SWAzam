@@ -1,5 +1,9 @@
 package main.tuwien.ac.at.swazam.peer.rest;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -10,6 +14,8 @@ import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
 
 import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
+import main.tuwien.ac.at.swazam.peer.music.library.Library;
+import main.tuwien.ac.at.swazam.peer.util.Peer;
 
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
@@ -43,7 +49,23 @@ public class ClientToPeerREST {
 		
 		//path user.dir is home dir must add the path manual
 		//String PATH = System.getProperty("user.dir")+"/library/";
-		Fingerprinter fprinter = new Fingerprinter("/home/user/Programmieren/workspace/SWAzam/SWAzamPeer/library");
+		
+		/**
+		 * DEBUG
+		 */
+		String PATH = "/home/user/Programmieren/workspace/SWAzam/SWAzamPeer/library/";
+		Peer peer = new Peer("peer2", "localhost", 8080);
+		
+		List<File> songs = new ArrayList<File>();
+		songs.add(new File( PATH + "b01.wav") );
+		songs.add(new File( PATH + "f01small.wav") );
+		songs.add(new File( PATH + "d01.wav") );
+		songs.add(new File( PATH + "f01.wav") );
+		
+		Library library = new Library(peer, songs);
+		library.setPath(PATH);
+		
+		Fingerprinter fprinter = new Fingerprinter(library);
 
 		// convert json to fingerprint
 		Gson gson = new Gson();

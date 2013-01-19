@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

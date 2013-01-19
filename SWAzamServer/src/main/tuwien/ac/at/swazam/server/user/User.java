@@ -30,6 +30,7 @@ public class User {
 	public User(String name, String password) {
 		this.name = name;
 		this.password = password;
+		this.coins = 50;
 	}
 	
 	public void setName(String name) {

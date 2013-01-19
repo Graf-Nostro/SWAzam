@@ -21,30 +21,33 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
  * @author Raunig Stefan
  */
 public class LibraryThread extends Thread {
-	
+
 	private static final Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.music.library.Librarythread.class");
 	
-	private final String path;
+	private final Library library;
+		
+	private Map<Fingerprint, String> map = new HashMap<Fingerprint, String>();
+	private final LibrarySerializer  libS;
 	
-	private Map<Fingerprint, String> library = new HashMap<Fingerprint, String>();
-	private final LibrarySerializer  libS = new LibrarySerializer();
-	
-	public LibraryThread(final String path){
-		this.path = path;
+	public LibraryThread(final Library library){
+		this.library = library;
+		
+		 libS = new LibrarySerializer(this.library);
 	}
 	
 	@Override
 	public void run() {
 		logger.log(Level.INFO, "Thread is running and computing fingerprints");
 		
-		for(File f: listFiles(path)){
+		for(File f: library.getSongs()){
 			try {
+				logger.log(Level.INFO, "\n" + library.listSongs());		
 				
 				//compute fingerprint
 				Fingerprint fpRaw = Fingerprinter.getFingerprint(f);
 				
 				//save in library
-				if( !library.containsKey(fpRaw) ) library.put(fpRaw, f.getName());
+				if( !map.containsKey(fpRaw) ) map.put(fpRaw, f.getName());
 				
 			} catch (IOException e) {
 				logger.log(Level.SEVERE, IOEXCEPTION_FINGERPRINT);
@@ -57,30 +60,7 @@ public class LibraryThread extends Thread {
 				//e.printStackTrace();
 			}
 		}
-		
 		//persist
-		libS.serializeMap(library);
-	}
-	
-	/**
-	 * Lists files in directory 
-	 * 
-	 * @param path to files
-	 * @return all files in that path
-	 */
-	private File[] listFiles(final String path){
-		String files;
-		File folder = new File(path);
-		
-		File[] listOfFiles = folder.listFiles(); 	
-		
-		//print out all files
-		for (int i = 0; i < listOfFiles.length; i++){
-			if (listOfFiles[i].isFile()) {
-				files = listOfFiles[i].getName();
-				logger.log(Level.FINE, files);
-			}
-		}
-		return listOfFiles;
+		libS.serializeMap(map);
 	}
 }

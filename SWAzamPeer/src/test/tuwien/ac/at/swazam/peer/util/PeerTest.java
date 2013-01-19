@@ -28,19 +28,6 @@ public class PeerTest {
 	}
 	
 	@Test
-	public void testConstructorName() {
-		peer = new Peer("peer1");
-		assertEquals("peer1", peer.getName());
-	}
-	
-	@Test
-	public void testConstructorIpAndPort() {
-		peer = new Peer("127.0.0.1", 80);
-		assertEquals("127.0.0.1", peer.getIp());
-		assertEquals(new Integer(80), peer.getPort());
-	}
-	
-	@Test
 	public void testConstructorNameAndIpAndPort() {
 		peer = new Peer("peer1", "127.0.0.1", 80);
 		assertEquals("peer1", peer.getName());
