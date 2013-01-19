@@ -1,16 +1,7 @@
 # ignore project files
-SWAzamClient/.classpath
-SWAzamClient/.project
-SWAzamClient/.settings
-
-SWAzamPeer/.classpath
-SWAzamPeer/.project
-SWAzamPeer/.settings
-
-SWAzamServer/.classpath
-SWAzamServer/.project
-SWAzamServer/.settings
-
+.classpath
+.project
+.settings
 .metadata
 
 # ignore fingerprint libs
