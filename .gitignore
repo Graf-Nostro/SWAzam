@@ -1,5 +1,4 @@
 # ignore project files
-.classpath
 .project
 .settings
 .metadata
