@@ -19,7 +19,7 @@ public class User {
 	private	String password = "";
 
 	@DatabaseField(columnName = COINS_FIELD_NAME)
-	private Integer coins = 0;
+	private Integer coins = 50;
 	
 	@ForeignCollectionField(eager = false)
     private ForeignCollection<SongRequest> songRequests;

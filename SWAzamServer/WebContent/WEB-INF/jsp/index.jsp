@@ -22,20 +22,19 @@
     		<div id="songrequests">
     			<c:forEach items="${songrequests}" var="song">
 			        <div class="singlerequest">
-			        	Name: ${song.name}, &nbsp;
-			        	<c:choose>
+			        	Name: <c:out value="${song.name}"/>, &nbsp;
+			         <!--	<c:choose>
 						   <c:when test="${song.recognizedSong}">
-						   		Earned: ${song.coins}
-						   </c:when> <!-- if condition --> 
+						   		Earned: <c:out value="${song.coins}"/>
+						   </c:when>
 						   <c:otherwise>
-			        			Cost: ${song.coins}
-			        	   </c:otherwise>    <!-- else condition -->
-						</c:choose>
+			        			Cost: <c:out value="${song.coins}"/>
+			        	   </c:otherwise> 
+						</c:choose> --> 
 			        </div>
-			      </c:forEach>
+			    </c:forEach>
     		</div>
     	</div>
     	
-        Value: [<c:out value="${obj}"/>] 
     </body>
 </html>
