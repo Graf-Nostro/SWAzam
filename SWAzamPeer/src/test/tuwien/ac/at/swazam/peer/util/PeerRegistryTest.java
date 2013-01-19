@@ -2,6 +2,7 @@ package test.tuwien.ac.at.swazam.peer.util;
 
 import static org.junit.Assert.*;
 
+import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.peer.util.PeerRegistry;
 
@@ -20,7 +21,9 @@ public class PeerRegistryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		peerRegistry = new PeerRegistry();
+		ServerConnector serverConnector = ServerConnector.getInstance();
+		serverConnector.setServerURL("http://localhost:8080/SWAzamServer");
+		peerRegistry = new PeerRegistry(serverConnector);
 	}
 
 	@After
@@ -46,6 +49,11 @@ public class PeerRegistryTest {
 		peerRegistry.addPeer("peer1", "127.0.0.1", 80);
 		peerRegistry.addPeer("peer2", "127.0.0.1", 81);
 		assertEquals("peer1", peerRegistry.getPeer("peer1").getName());
+	}
+	
+	@Test
+	public void testUpdatePeersFromServer() {
+		peerRegistry.updatePeersFromServer();
 	}
 
 }

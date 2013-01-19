@@ -3,6 +3,9 @@ package main.tuwien.ac.at.swazam.peer.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
+import main.tuwien.ac.at.swazam.peer.connector.ServerNotAvailableException;
+
 /**
  * Stores peers and provides possibilities to access peers.
  * 
@@ -11,6 +14,32 @@ import java.util.List;
 public class PeerRegistry {
 	
 	List<Peer> peers = new ArrayList<Peer>();
+	ServerConnector serverConnector;
+	
+	public PeerRegistry(ServerConnector serverConnector) {
+		this.serverConnector = serverConnector;
+	}
+	
+	/**
+	 * Fetches a list of peers from the servers and stores it in the registry.
+	 * 
+	 * @return
+	 */
+	public PeerRegistry updatePeersFromServer() {
+		ArrayList<Peer> peers = null;
+		try {
+			peers = serverConnector.getPeers();
+		} catch (ServerNotAvailableException e) {
+			e.printStackTrace();
+		}
+		
+		for (int i = 0; i < peers.size(); i++) {
+			System.out.println(peers.get(i).getName());
+			addPeer(peers.get(i));
+		}
+		
+		return this;
+	}
 	
 	/**
 	 * Returns the peer with the given name.
@@ -61,6 +90,16 @@ public class PeerRegistry {
 	 */
 	public Integer getSize() {
 		return peers.size();
+	}
+	
+	public Peer getRandomPeer() {
+		System.out.println("peer count: " + peers.size());
+		if (peers.size() == 0) {
+			return null;
+		}
+		
+		int index = 0 + (int)(Math.random() * ((peers.size()) + 1));
+		return peers.get(index);
 	}
 	
 }

@@ -16,7 +16,7 @@ public class ServerConnectorTest {
 
 	@Before
 	public void setUp() throws Exception {
-		serverConnector = new ServerConnector();
+		serverConnector = ServerConnector.getInstance();
 	}
 
 	@After
