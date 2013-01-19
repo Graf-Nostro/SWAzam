@@ -56,12 +56,15 @@ public class CoreUserManagement {
 			songDao = DaoManager.createDao(connectionSource, SongRequest.class);
 			
 			LOG.info("\n\nDatabase Connection seems to have worked\n\n");
-		} finally {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		/*finally {
 			// destroy the data source which should close underlying connections
 			if (connectionSource != null) {
 				connectionSource.close();
 			}
-		}
+		}*/
 	}
 	
 	/**

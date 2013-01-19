@@ -1,5 +1,6 @@
 package main.tuwien.ac.at.swazam.peer;
 
+<<<<<<< HEAD
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -15,12 +16,15 @@ import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
 import main.tuwien.ac.at.swazam.peer.music.library.NoSuchFileInMusicLibrary;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 
+=======
+>>>>>>> b6f321a8022e28240d68f1724885c0dbd57911e2
 public class MainPeer {
 	
 	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.MainPeer");
 	public static Peer peer;
 
 	public static void main(String[] args) {
+<<<<<<< HEAD
 		if (args.length < 1) {
 			System.out.println("Missing peer name.");
 			System.exit(-1);
@@ -74,6 +78,9 @@ public class MainPeer {
 			e.printStackTrace();
 		}
 		*/
+=======
+		//made testcase FingerprinterTest
+>>>>>>> b6f321a8022e28240d68f1724885c0dbd57911e2
 	}
 	
 }
