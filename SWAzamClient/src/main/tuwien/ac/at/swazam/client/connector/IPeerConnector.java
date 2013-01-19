@@ -1,8 +1,8 @@
 package main.tuwien.ac.at.swazam.client.connector;
 
-import java.io.IOException;
+import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 
 public interface IPeerConnector {
 
-    void sendRequest() throws IOException;
+	Boolean sendRequest(Request request) throws PeerNotAvailableException;
 }

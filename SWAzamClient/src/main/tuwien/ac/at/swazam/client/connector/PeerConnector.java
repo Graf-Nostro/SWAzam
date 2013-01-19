@@ -3,6 +3,7 @@ package main.tuwien.ac.at.swazam.client.connector;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Logger;
 
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
@@ -11,6 +12,8 @@ import main.tuwien.ac.at.swazam.util.Response;
 import com.google.gson.Gson;
 
 public class PeerConnector implements IPeerConnector {
+	
+	private Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.client.connector.PeerConnector");
 
 	private String peerURL; 
 	
@@ -38,6 +41,9 @@ public class PeerConnector implements IPeerConnector {
 		try {
 			Gson gson = new Gson();
 			Response response = rest.put(new URL(peerURL + "/rest/find/music "), gson.toJson(request));
+			
+			logger.finest("response code = "+response.getCode());
+			
 			if (response.getCode() != 200) {
 				throw new PeerNotAvailableException();
 			}

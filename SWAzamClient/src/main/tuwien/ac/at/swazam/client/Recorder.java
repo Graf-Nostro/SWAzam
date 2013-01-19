@@ -10,7 +10,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Recorder {
 
 	
-	
+	/*
 	public static AudioInputStream getSample(String path) throws IOException {
 		
 		try {
@@ -20,5 +20,5 @@ public class Recorder {
 			e.printStackTrace();
 			throw new IOException(e.getMessage());
 		}
-	}
+	}*/
 }

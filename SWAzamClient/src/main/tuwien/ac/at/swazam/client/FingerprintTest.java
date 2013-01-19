@@ -1,6 +1,8 @@
 package main.tuwien.ac.at.swazam.client;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import javax.sound.sampled.AudioInputStream;
 
@@ -8,6 +10,8 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 public class FingerprintTest {
 
+	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.client.FingerprintTest");
+	
 	
 	public static void test() {
 	
@@ -20,8 +24,7 @@ public class FingerprintTest {
 	//		System.out.println("AudioFileFormat = "+AudioSystem.getAudioFileFormat(file).toString());
 			
 			String path = System.getProperty("user.dir")+"/res/";
-			System.out.println();
-			
+		/*	
 			System.out.println("Reading audio 01 ...");
 			AudioInputStream audio01 = Recorder.getSample(path+"audio-01.wav");
 			System.out.println("Reading sample 01 ...");
@@ -34,6 +37,14 @@ public class FingerprintTest {
 			Fingerprint fp2 = Fingerprinter.getFingerprint(sample01);
 			System.out.println("Fingerprinting sample 01 distorted");
 			Fingerprint fp3 = Fingerprinter.getFingerprint(sample01dist);
+			*/
+			
+			logger.finest("Fingerprinting audio 01");
+			Fingerprint fp1 = Fingerprinter.getFingerprint(new File(path+"audio-01.wav"));
+			logger.finest("Fingerprinting sample 01");
+			Fingerprint fp2 = Fingerprinter.getFingerprint(new File(path+"sample-01.wav"));
+			logger.finest("Fingerprinting sample 01 distorted");
+			Fingerprint fp3 = Fingerprinter.getFingerprint(new File(path+"sample-01-dist.wav"));
 			
 			System.out.print("Matching original file to itself: ");
 			double result1 = fp1.match(fp1);
