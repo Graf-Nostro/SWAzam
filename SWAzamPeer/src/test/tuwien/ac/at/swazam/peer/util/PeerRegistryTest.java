@@ -21,7 +21,9 @@ public class PeerRegistryTest {
 
 	@Before
 	public void setUp() throws Exception {
-		peerRegistry = new PeerRegistry(ServerConnector.getInstance());
+		ServerConnector serverConnector = ServerConnector.getInstance();
+		serverConnector.setServerURL("http://localhost:8080/SWAzamServer");
+		peerRegistry = new PeerRegistry(serverConnector);
 	}
 
 	@After
@@ -47,6 +49,11 @@ public class PeerRegistryTest {
 		peerRegistry.addPeer("peer1", "127.0.0.1", 80);
 		peerRegistry.addPeer("peer2", "127.0.0.1", 81);
 		assertEquals("peer1", peerRegistry.getPeer("peer1").getName());
+	}
+	
+	@Test
+	public void testUpdatePeersFromServer() {
+		peerRegistry.updatePeersFromServer();
 	}
 
 }

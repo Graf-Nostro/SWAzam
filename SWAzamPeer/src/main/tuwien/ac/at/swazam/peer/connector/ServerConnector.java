@@ -4,8 +4,12 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
@@ -42,9 +46,10 @@ public class ServerConnector {
 	
 	public ArrayList<Peer> getPeers() throws ServerNotAvailableException {
 		RESTUtil rest = new RESTUtil();
+		Response response = null;
 		
 		try {
-			Response response = rest.get(new URL(serverURL + "/RESTPeerManagement/peers"));
+			response = rest.get(new URL(serverURL + "/RESTPeerManagement/peers"));
 			if (response.getCode() >= 300) {
 				throw new ServerNotAvailableException();
 			}
@@ -54,9 +59,10 @@ public class ServerConnector {
 			e.printStackTrace();
 		}
 		
-		ArrayList<Peer> result = new ArrayList<Peer>();
-		// TODO: Parse result and add to array
-		return result;
+		Type collectionType = new TypeToken<ArrayList<Peer>>(){}.getType();
+		ArrayList<Peer> peers = new Gson().fromJson(response.getBody(), collectionType);
+		
+		return peers;
 	}
 
 	public Boolean register(Peer peer) throws ServerNotAvailableException {

@@ -34,6 +34,7 @@ public class PeerRegistry {
 		}
 		
 		for (int i = 0; i < peers.size(); i++) {
+			System.out.println(peers.get(i).getName());
 			addPeer(peers.get(i));
 		}
 		
@@ -89,6 +90,16 @@ public class PeerRegistry {
 	 */
 	public Integer getSize() {
 		return peers.size();
+	}
+	
+	public Peer getRandomPeer() {
+		System.out.println("peer count: " + peers.size());
+		if (peers.size() == 0) {
+			return null;
+		}
+		
+		int index = 0 + (int)(Math.random() * ((peers.size()) + 1));
+		return peers.get(index);
 	}
 	
 }

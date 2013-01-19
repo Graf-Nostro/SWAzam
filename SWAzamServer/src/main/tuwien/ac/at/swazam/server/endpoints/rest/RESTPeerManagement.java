@@ -30,11 +30,18 @@ public class RESTPeerManagement {
 		/* DO REGISTER 
 		 * Request Body:
 		 * {"ip":"127.0.0.1","port":8080,"name":"peer1"} */
+		
+		try {
+			peerManagement = new CorePeerManagement();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return Response.created(null).build();
+		}
+		
 		System.out.println("printing out request: " + request);
 		try {
 			Gson gson = new Gson();
 			Peer peer = gson.fromJson(request, Peer.class);
-			peerManagement = new CorePeerManagement();
 			peerManagement.registerPeer(peer);
 		} catch (Exception e) { 
 			e.printStackTrace();
@@ -49,16 +56,14 @@ public class RESTPeerManagement {
 	@Path("/peers")
 	@Produces("application/json")
 	public String peers(@Context HttpServletRequest request) {
+		Gson gson = new Gson();
 		try {
 			peerManagement = new CorePeerManagement();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			return gson.toJson(null);
 		}
-		Gson gson = new Gson();
-		// produce json
 		
-		System.out.println("/getList called");
+		System.out.println("/peers called (returning " + peerManagement.getPeers().size() + " peers)");
 		
 		return gson.toJson(peerManagement.getPeers());
 	}

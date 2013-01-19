@@ -49,12 +49,12 @@ public class RESTUtil {
 		}
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-		String line = null;
+		String line = reader.readLine();
 		String body = "";
-		do {
-			line = reader.readLine();
+		while (line != null) {
 			body = body + line;
-		} while(line != null);
+			line = reader.readLine();
+		}
 		
 		return createResponse(httpCon.getResponseCode(), httpCon.getResponseMessage(), body);
 	}
