@@ -104,6 +104,7 @@ public class CoreUserManagement {
 		// persist the account object to the database
         try {
 			userDao.update(user);
+			userDao.refresh(user);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			LOG.warning(e.toString());
