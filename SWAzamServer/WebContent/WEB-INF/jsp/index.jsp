@@ -7,7 +7,35 @@
 
 <!DOCTYPE html>
 <html>
+	<head>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+	</head>
     <body>
+    	<h1>SWAZAM ADMIN INTERFACE</h1>
+    	<div id="account">Hello, <c:out value="${name}"/></div>
+    	<div id="accountmanagement"><a href="RESTUserManagement/delete">Delete Account</a></div>
+    	<div id="coins">
+    		You have <c:out value="${coins}"/> coins <br />
+    	</div>
+    	<div id="requests">
+    		History of submitted song requests, plus how much you spent / earned:
+    		<div id="songrequests">
+    			<c:forEach items="${songrequests}" var="song">
+			        <div class="singlerequest">
+			        	Name: ${song.name}, &nbsp;
+			        	<c:choose>
+						   <c:when test="${song.recognizedSong}">
+						   		Earned: ${song.coins}
+						   </c:when> <!-- if condition --> 
+						   <c:otherwise>
+			        			Cost: ${song.coins}
+			        	   </c:otherwise>    <!-- else condition -->
+						</c:choose>
+			        </div>
+			      </c:forEach>
+    		</div>
+    	</div>
+    	
         Value: [<c:out value="${obj}"/>] 
     </body>
 </html>

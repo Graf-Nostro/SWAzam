@@ -28,20 +28,20 @@ public class RESTUserManagement {
 	@POST
 	@Path("login")
 	public Viewable login(@Context HttpServletRequest request, @FormParam("name") String name, @FormParam("passwd") String passwd) {
+		System.out.println("/LOGIN called");
 		// DO LOGIN
-		boolean loggedIn = false;
 		try {
 			user = new CoreUserManagement();
 			if ( user.checkLogin(name, passwd) ) {
+				
 				request.setAttribute("obj", new String("Logged in as " + name));
+				return new Viewable("/index.jsp", null);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		System.out.println("/LOGIN called");
-		return new Viewable("/index.jsp", null);
+		return new Viewable("/../../index.html", null);
 	}
 	
 	@POST
