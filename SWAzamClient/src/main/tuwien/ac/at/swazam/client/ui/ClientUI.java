@@ -41,7 +41,9 @@ public class ClientUI extends JFrame implements ActionListener {
 	private JLabel lblUsername;
 	private JLabel lblPassword;
 	private JLabel lblFill;
+	private JLabel lblFillRequest;
 	private JLabel lblSample;
+	private JLabel lblStatus;
 	
 	private JTextArea results;
 
@@ -53,6 +55,7 @@ public class ClientUI extends JFrame implements ActionListener {
 	private final JButton btnRecord;
 	
 	private final MusicRecognitionRequest request;
+	
 
 
 	/**
@@ -72,7 +75,7 @@ public class ClientUI extends JFrame implements ActionListener {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new MigLayout("", "[grow]", "[top][][][][grow]"));
+		contentPane.setLayout(new MigLayout("", "[grow]", "[top][][][][][grow]"));
 		
 		plRegistration = new JPanel();
 		plRegistration.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -111,14 +114,21 @@ public class ClientUI extends JFrame implements ActionListener {
 		contentPane.add(btnSubmit, "cell 0 2,alignx center");
 		
 		lblSample = new JLabel("No sample selected");
-		contentPane.add(lblSample, "cell 0 3,alignx left");
+		contentPane.add(lblSample, "flowx,cell 0 3,alignx left");
 		
 		results = new JTextArea(10,40);
 		results.setText(" Results of Music Recognition Requests \n" +
 						" ------------------------------------- \n\n");
 		results.setEditable(false);
 		JScrollPane sp = new JScrollPane(results);
-		contentPane.add(sp, "cell 0 4, alignx center growx");
+		contentPane.add(sp, "cell 0 5,alignx center");
+		
+		lblFillRequest = new JLabel("");
+		lblFillRequest.setHorizontalAlignment(SwingConstants.LEFT);
+		contentPane.add(lblFillRequest, "cell 0 3,growx");
+		
+		lblStatus = new JLabel("");
+		contentPane.add(lblStatus, "cell 0 3,alignx left");
 	
 		
 		btnRecord.addActionListener(this);
@@ -149,13 +159,20 @@ public class ClientUI extends JFrame implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Please choose a sample file first", "Selecting file", JOptionPane.INFORMATION_MESSAGE);
 			
 			else {
+				lblStatus.setText("Sending request ...");
+				
 				boolean result = request.sendRequest();
 				
-				if(result)
+				if(result) {
 					JOptionPane.showMessageDialog(this, "Request sent successfully", "Sending request", JOptionPane.INFORMATION_MESSAGE);
+					lblStatus.setText("Request sent");
+				}
 				
-				else
+				else {
 					JOptionPane.showMessageDialog(this, "Request failed", "Request not successful", JOptionPane.ERROR_MESSAGE);
+					lblStatus.setText("Request failed");
+				}
+				
 			}
 		}
 	}

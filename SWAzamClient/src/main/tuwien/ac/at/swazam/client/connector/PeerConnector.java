@@ -55,9 +55,9 @@ public class PeerConnector implements IPeerConnector {
 			else
 				return true;
 		} catch (MalformedURLException e) {
-			e.printStackTrace();
+			logger.warning("Invalid URL");
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.warning("Error when sending request");
 		}
 		
 		return false;
