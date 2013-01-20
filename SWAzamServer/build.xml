@@ -8,6 +8,7 @@
 	<property name="web-xml-file" value="${web-directory}/WEB-INF/web.xml" />
 	<property name="build-directory" value="./" />
 	<property name="vendor-directory" value="vendor" />
+	<property name="properties-file" value="tomcat.properties" />
 	
 	<path id="catalina-ant-classpath">
 	    <fileset dir="vendor">
@@ -75,7 +76,8 @@
 	</target>
 	
 	<target name="compile">  
-		<mkdir dir="${classes-directory}"/>  
+		<mkdir dir="${classes-directory}"/>
+		<copy file="${properties-file}" tofile="${classes-directory}/${properties-file}"/>
 		<javac includeantruntime="false" srcdir="${source-directory}" destdir="${classes-directory}" classpathref="classpath"/>  
 	</target>  
 	

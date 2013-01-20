@@ -1,9 +1,5 @@
 package main.tuwien.ac.at.swazam.peer;
 
-
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
@@ -12,6 +8,8 @@ import main.tuwien.ac.at.swazam.peer.connector.ServerNotAvailableException;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 
 public class MainPeer {
+	
+	public static final String PROPERTY_FILE = "tomcat.properties";
 	
 	@SuppressWarnings("unused")
 	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.MainPeer");
