@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
-import main.tuwien.ac.at.swazam.peer.music.library.LibrarySerializer;
+import main.tuwien.ac.at.swazam.peer.music.library.MusicRecognizer;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.peer.util.PeerCreator;
 
@@ -45,12 +45,9 @@ public class ClientToPeerREST {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response requestJson(String json, @Context HttpServletRequest request) {
 		Peer peer = new PeerCreator().createFromRequest(request);
-		new LibrarySerializer(peer.getLibrary()).deserialize();
-		
 		Fingerprint fingerprint = new Gson().fromJson(json, Fingerprint.class);
-		String result = peer.getLibrary().matchFingerprint(fingerprint);
-
-		return Response.status(201).entity(result).build();
+		
+		return Response.status(201).entity(new MusicRecognizer(peer, fingerprint).recognize()).build();
 	}
 
 	// This method is called if HTML is request
