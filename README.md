@@ -6,7 +6,7 @@ Deploy & run SWAzam
 
 ### Compile & deploy the server
 
-´´´bash
+´´´shell
 ./scripts/deploy-server.sh
 ´´´
 
@@ -14,13 +14,13 @@ Deploy & run SWAzam
 
 This scripts deploys 5 different peers and allows adds some sample files to the media libraries of the peers.
 
-´´´bash
+´´´shell
 ./scripts/deploy-peer.sh
 ´´´
 
 ### Run the client
 
-´´´bash
+´´´shell
 ./scripts/run-client.sh
 ´´´
 
@@ -29,7 +29,7 @@ Management of peers
 
 It is possible to view the songs in the media library of a peer and add and remove songs using this script. When adding media files the files must already be in the library folder.
 
-´´´bash
+´´´shell
 ./scripts/peer.sh list florian
 ./scripts/peer.sh add florian f01.wav
 ./scripts/peer.sh remove florian f01.wav
