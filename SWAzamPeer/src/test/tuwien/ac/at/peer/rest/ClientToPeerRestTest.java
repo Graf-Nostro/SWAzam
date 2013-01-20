@@ -38,7 +38,7 @@ public class ClientToPeerRestTest {
 	private final int OK201 = 201;
 	
 	private final String PATH = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
-	private final String FILE_NAME = "f01small.wav";
+	private final String FILE_NAME = "Leslie - Woods - 05 - Accommodation.wav";
 	
 	@Before
 	public void setUp() throws Exception {

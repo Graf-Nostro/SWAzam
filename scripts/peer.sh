@@ -17,4 +17,4 @@
 
 BASEDIR=$(cd "$(dirname "$0")/.."; pwd)
 
-java -jar -Dlibrary-directory="$BASEDIR/SWAzamPeer/library" $BASEDIR/SWAzamPeer/bin/SWAzamPeer.jar $*
+java -jar -Dlibrary-directory="$BASEDIR/SWAzamPeer/library" $BASEDIR/SWAzamPeer/bin/SWAzamPeer.jar $1 $2 "$3"
