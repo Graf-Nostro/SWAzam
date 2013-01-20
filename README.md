@@ -28,6 +28,11 @@ Now you need to configure the build process. Therefore copy `build.properties.di
     cp SWAzamPeer/build.properties.dist SWAzamPeer/build.properties
     cp SWAzamServer/build.properties.dist SWAzamServer/build.properties
 
+You have to do the same thing for the `tomcat.properties` file in `SWAzamPeer` and `SWAzamServer`.
+
+    cp SWAzamPeer/tomcat.properties.dist SWAzamPeer/tomcat.properties
+    cp SWAzamServer/tomcat.properties.dist SWAzamServer/tomcat.properties
+
 You should now be able to compile and deploy the server components (you have to `cd` into the specific project directory):
 
     ant build-and-deploy
@@ -35,6 +40,31 @@ You should now be able to compile and deploy the server components (you have to 
 The GUI of the client can also be run with Ant:
 
     ant run
+
+Custom Properties
+-----------------
+
+It is now possible to give custom properties to client, peer and server. Client properties are stored in the `build.properties` file and are set as system properties in the Ant build script. You can access them using:
+
+```java
+System.getProperty("server-url");
+System.getProperty("library-directory")
+```
+
+The process for peer and server is a little bit different. They are copied into the `WEB-INF/classes` when the project is compiled.
+
+To access properties in the **peer**:
+
+```java
+PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("server-url");
+PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
+```
+
+To access properties in the **server**:
+
+```java
+PropertyReader.getInstance(MainServer.PROPERTY_FILE).getProperty("database-file");
+```
 
 
 Software to install
