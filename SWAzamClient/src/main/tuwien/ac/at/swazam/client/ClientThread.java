@@ -8,7 +8,6 @@ import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.client.utils.ClientUtils;
-import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
 
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
@@ -32,9 +31,9 @@ public class ClientThread implements Runnable {
 		try {
 			
 			logger.info("path = "+ClientUtils.getFilePath()+sample);
-			Boolean result = peerConnector.sendMusicRecognitionRequest(new File(ClientUtils.getFilePath()+sample));
+			String result = peerConnector.sendMusicRecognitionRequest(new File(ClientUtils.getFilePath()+sample));
 			
-			if(result) {
+			if(result != null) {
 				logger.info("Request sent successfully");
 			}
 			

@@ -9,7 +9,6 @@ import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.client.utils.ClientUtils;
-import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
 
 public class MusicRecognitionRequest {
 	

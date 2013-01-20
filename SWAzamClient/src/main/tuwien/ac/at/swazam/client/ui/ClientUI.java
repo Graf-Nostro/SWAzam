@@ -54,7 +54,7 @@ public class ClientUI extends JFrame implements ActionListener {
 	private JLabel lblSample;
 	private JLabel lblStatus;
 	
-	private JTextArea results;
+	private JTextArea taResults;
 
 	private JButton btnLogin;
 	private JButton btnRegister;
@@ -130,11 +130,11 @@ public class ClientUI extends JFrame implements ActionListener {
 		lblSample = new JLabel("No sample selected");
 		contentPane.add(lblSample, "flowx,cell 0 3,alignx left");
 		
-		results = new JTextArea(10,40);
-		results.setText(" Results of Music Recognition Requests \n" +
+		taResults = new JTextArea(10,40);
+		taResults.setText(" Results of Music Recognition Requests \n" +
 						" ------------------------------------- \n\n");
-		results.setEditable(false);
-		JScrollPane sp = new JScrollPane(results);
+		taResults.setEditable(false);
+		JScrollPane sp = new JScrollPane(taResults);
 		contentPane.add(sp, "cell 0 5,alignx center");
 		
 		lblFillRequest = new JLabel("");
@@ -150,8 +150,8 @@ public class ClientUI extends JFrame implements ActionListener {
 		
 		musicRequest = new MusicRequestWrapper();
 		
-		UserManagement.setUsername("Andi");
-		UserManagement.setPassword("1234");
+		UserManagement.setUsername("admin");
+		UserManagement.setPassword("admin");
 		
 		peerConnector = new PeerConnector();
 		serverConnector = new ServerConnector();
@@ -187,16 +187,17 @@ public class ClientUI extends JFrame implements ActionListener {
 				}
 				lblStatus.setText("Sending request ...");
 				
-				boolean result = false;
+				String result = null;
 				try {
 					result = peerConnector.sendMusicRecognitionRequest(musicRequest.getSample());
 				} catch (PeerNotAvailableException e1) {
 					logger.warning("Sending music recognition request failed");
 				}
 				
-				if(result) {
-					JOptionPane.showMessageDialog(this, "Request sent successfully", "Sending request", JOptionPane.INFORMATION_MESSAGE);
+				if(result != null) {
+					JOptionPane.showMessageDialog(this, "Request processed successfully", "Processing request", JOptionPane.INFORMATION_MESSAGE);
 					lblStatus.setText("Request sent");
+					taResults.setText(taResults.getText() + " " + result + "\n");
 				}
 				
 				else {

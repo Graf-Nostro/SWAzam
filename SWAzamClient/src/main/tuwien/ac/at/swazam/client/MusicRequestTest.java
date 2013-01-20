@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
-import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 public class MusicRequestTest {
@@ -21,8 +20,8 @@ public class MusicRequestTest {
 		IPeerConnector peerConnector = new PeerConnector("http://localhost:8081/SWAzamPeer");
 		
 		try {
-			Boolean response = peerConnector.sendMusicRecognitionRequest(new File(System.getProperty("user.dir")+"/library/f01small.wav"));
-			if(response)
+			String response = peerConnector.sendMusicRecognitionRequest(new File(System.getProperty("user.dir")+"/library/f01small.wav"));
+			if(response != null)
 				logger.fine("request successful!");
 			
 			else
