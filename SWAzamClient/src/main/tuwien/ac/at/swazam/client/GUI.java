@@ -13,8 +13,11 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.TitledBorder;
@@ -30,21 +33,6 @@ public class GUI extends JFrame {
 	private JTextField username;
 	private JPasswordField password;
 
-	/**
-	 * Launch the application.
-	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the frame.
@@ -100,6 +88,14 @@ public class GUI extends JFrame {
 		
 		JButton btnSubmit = new JButton("Submit request");
 		contentPane.add(btnSubmit, "cell 0 2,alignx center");
+		
+		JTextArea results = new JTextArea(10,40);
+		results.setText(" Results of Music Recognition Requests \n" +
+						" ------------------------------------- \n\n");
+		results.setEditable(false);
+		JScrollPane sp = new JScrollPane(results, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		contentPane.add(sp, "cell 0 4, alignx center growx");
+	
 		btnRecord.addActionListener(new ActionListener() {
 
 			@Override
