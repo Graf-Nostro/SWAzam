@@ -34,12 +34,19 @@ public class Fingerprinter {
 		this.library = library;
 		libS = new LibrarySerializer(library);
 		
-		LibraryThread th = new LibraryThread(library);
-		th.start();
+		//compute file library
+		if( ! new File( library.getPath() + library.getLibName() ).exists() ) createLibraryFile();
 		
 		//load in file
-		if( new File( library.getPath() + library.getLibName() ).exists() ) map = libS.deserializeMap();
-		else th.run();
+		map = libS.deserializeMap();
+	}
+	
+	/**
+	 * compute file library
+	 */
+	public void createLibraryFile(){
+		LibraryWorker th = new LibraryWorker(library);
+		th.run();
 	}
 	
 	/**
@@ -69,7 +76,7 @@ public class Fingerprinter {
 		if( new File( library.getPath() + library.getLibName() ).exists() ) map = libS.deserializeMap();
 		
 		if(map.containsKey(fp)) {
-			logger.log(Level.INFO, "Found one!");
+			logger.log(Level.INFO, "Found one! " + map.get(fp));
 			return map.get(fp);
 		} else {
 			logger.log(Level.INFO, "Found none!");
