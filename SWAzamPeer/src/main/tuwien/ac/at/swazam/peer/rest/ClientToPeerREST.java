@@ -1,6 +1,10 @@
 package main.tuwien.ac.at.swazam.peer.rest;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,13 +52,20 @@ public class ClientToPeerREST {
 	// This method is called if JSON is request
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-
 	public Response requestJson(String json, @Context HttpServletRequest request) {
 		// create response obj. with gson to jason format
 		
-		//path user.dir is home dir must add the path manual
-		//String PATH = System.getProperty("user.dir")+"/library/";		
-				
+		String peername  = request.getContextPath() + request.getPathInfo();
+		String localname = request.getLocalName();
+		int    port		 = request.getLocalPort();
+		
+		//ip if needed
+		//String localadd  = request.getLocalAddr();
+		
+		System.out.println("Name: " + localname + ", Addr.: " + peername + ", Port: " + port);
+		
+		//Peer peer = new Peer(peername, localname, port);
+		
 		/**
 		 * DEBUG
 		 */
