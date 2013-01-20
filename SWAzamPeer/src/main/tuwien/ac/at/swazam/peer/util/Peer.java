@@ -17,6 +17,10 @@ public class Peer {
 	private String  name;
 	
 	private Library library;
+	
+	public Peer(String name) {
+		this(name, null, null);
+	}
 			
 	/**
 	 * Initializes a peer with name, IP address and port.
@@ -109,21 +113,5 @@ public class Peer {
 	 */
 	public void setLibrary(final Library library){
 		this.library = library;
-	}
-	
-	/**
-	 * 
-	 * @param file
-	 */
-	public void addFile(final File file){
-		this.library.addSong(file);
-	}
-	
-	/**
-	 * 
-	 * @param files
-	 */
-	public void addFiles(final List<File> files){
-		this.library.addSongs(files);
 	}
 }
