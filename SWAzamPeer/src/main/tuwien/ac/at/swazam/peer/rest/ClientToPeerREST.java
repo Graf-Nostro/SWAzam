@@ -1,13 +1,5 @@
 package main.tuwien.ac.at.swazam.peer.rest;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,11 +11,9 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
-import main.tuwien.ac.at.swazam.peer.MainPeer;
-import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
-import main.tuwien.ac.at.swazam.peer.music.library.Library;
+import main.tuwien.ac.at.swazam.peer.music.library.MusicRecognizer;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
-import main.tuwien.ac.at.swazam.util.PropertyReader;
+import main.tuwien.ac.at.swazam.peer.util.PeerCreator;
 
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
@@ -38,6 +28,7 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
  * REST endpoint for Client Requests
  * 
  * @author Raunig Stefan
+ * @author Florian Eckerstorfer <florian@eckerstorfer.co>
  */
 @Path("/rest/find/music")
 public class ClientToPeerREST {
@@ -53,44 +44,10 @@ public class ClientToPeerREST {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response requestJson(String json, @Context HttpServletRequest request) {
-		// create response obj. with gson to jason format
+		Peer peer = new PeerCreator().createFromRequest(request);
+		Fingerprint fingerprint = new Gson().fromJson(json, Fingerprint.class);
 		
-		String peername  = request.getContextPath() + request.getPathInfo();
-		String localname = request.getLocalName();
-		int    port		 = request.getLocalPort();
-		
-		//ip if needed
-		//String localadd  = request.getLocalAddr();
-		
-		System.out.println("Name: " + localname + ", Addr.: " + peername + ", Port: " + port);
-		
-		//Peer peer = new Peer(peername, localname, port);
-		
-		/**
-		 * DEBUG
-		 */
-		String PATH = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
-		Peer p = new Peer("peer2", "localhost", 8080);
-		
-		List<File> songs = new ArrayList<File>();
-		songs.add(new File( "b01.wav") );
-		songs.add(new File( "f01small.wav") );
-		songs.add(new File( "d01.wav") );
-		songs.add(new File( "f01.wav") );
-		
-		Library library = new Library(p, songs);
-		library.setPath(PATH);
-		
-		Fingerprinter fprinter = new Fingerprinter(library);
-
-		// convert json to fingerprint
-		Gson gson = new Gson();
-		Fingerprint fp = gson.fromJson(json, Fingerprint.class);
-		
-		//find match and return it
-		String result = fprinter.matchFingerprintToLibrary(fp);
-
-		return Response.status(201).entity(result).build();
+		return Response.status(201).entity(new MusicRecognizer(peer, fingerprint).recognize()).build();
 	}
 
 	// This method is called if HTML is request

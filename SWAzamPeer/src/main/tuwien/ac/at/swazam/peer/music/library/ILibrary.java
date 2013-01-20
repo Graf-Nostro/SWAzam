@@ -1,28 +1,36 @@
 package main.tuwien.ac.at.swazam.peer.music.library;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 
 public interface ILibrary {
 
 	//Songs in library
-	public void       addSong   (final File file);
-	public void       addSongs  (final List<File> songs);
-	public void       deleteSong(final File file);
+	public Library addSong(File file, Fingerprint fingerprint);
+	public Library addSong(File file) throws IOException, UnsupportedAudioFileException;
+	
+	public Library addSongs(List<File> songs) throws IOException, UnsupportedAudioFileException;
+	
+	public Library deleteSong(File file);
+	
 	public List<File> getSongs();
-	public String     listSongs();
 	
-	//Library Path
-	public String getPath();
-	public void   setPath(final String path);
-	
-	//Library Name
-	public String getLibName();
-	public void   setLibName(final String name);
-	
-	//Peer information
 	public Peer getPeer();
-	public void setPeer(final Peer peer);
+	
+	public void setPeer(Peer peer);
+	
+	public String getLibraryFile();
+	public String getLibraryPath();
+	
+	public Map<Fingerprint, String> getFingerprintMap();
+	
+	public String matchFingerprint(Fingerprint fingerprint);
 }

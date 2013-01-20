@@ -25,3 +25,4 @@ SWAzamServer/WebContent/WEB-INF/classes/
 build.properties
 tomcat.properties
 
+SWAzamPeer/library/*.dat

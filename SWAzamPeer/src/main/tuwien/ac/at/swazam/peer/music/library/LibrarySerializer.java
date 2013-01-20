@@ -1,5 +1,6 @@
 package main.tuwien.ac.at.swazam.peer.music.library;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -20,68 +21,64 @@ import static main.tuwien.ac.at.swazam.peer.Strings.*;
  * Utility Class to save and load the HashMap library for performance issus
  * 
  * @author Raunig Stefan
+ * @author Florian Eckerstorfer <florian@eckerstorfer.co>
  *
  * SuppressWarning serial id is optimized by compiler
  */
 @SuppressWarnings("serial")
-public class LibrarySerializer implements Serializable {
-
+public class LibrarySerializer implements Serializable
+{
 	private static Logger logger = Logger.getLogger("ac.at.tuwien.swazam.peer.music.library.LibrarySerializer");
 	
-	private String LIBRARY_NAME;
+	private Library library;
 	
 	public LibrarySerializer(final Library library){
-		LIBRARY_NAME = library.getPath() + library.getPeer().getName() + "Library.dat";
-	}
-
-	/**
-	 * serialize map and save it to file
-	 */
-	public void serializeMap(final Map<Fingerprint, String> map){		 		
-		try {
-	    	FileOutputStream fos = new FileOutputStream(LIBRARY_NAME);
-	    	ObjectOutputStream oos = new ObjectOutputStream(fos);
-	    	oos.writeObject(map);
-	    	oos.close();
-	    	
-	    	fos.close();	      
-	    } catch(IOException e) { 
-	    	logger.log(Level.SEVERE, IO_SERIALIZATION);
-	    	
-	    	e.printStackTrace();
-	    }
+		this.library = library; 
 	}
 	
-	/**
-	 * Deserialize the map and load it from file
-	 * 
-	 * @return Fingerprint HashMap
-	 */
+	public LibrarySerializer serialize() {
+		try {
+			FileOutputStream fos = new FileOutputStream(library.getLibraryFile());
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(library.getFingerprintMap());
+			oos.close();
+			fos.close();
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, IO_SERIALIZATION);
+			e.printStackTrace();
+		}
+		return this;
+	}
+	
 	@SuppressWarnings("unchecked")
-	public Map<Fingerprint, String> deserializeMap(){		
-		Map<Fingerprint, String> deSerMap = null;
+	public LibrarySerializer deserialize() {
+		Map<Fingerprint, String> fingerprintMap = null;
+		if (!new File(library.getLibraryFile()).exists()) {
+			return this;
+		}
 		
 		try {
-			FileInputStream fis = new FileInputStream(LIBRARY_NAME);
+			FileInputStream fis = new FileInputStream(library.getLibraryFile());
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			
-			deSerMap = (Map<Fingerprint, String>) ois.readObject();
+			fingerprintMap = (Map<Fingerprint, String>)ois.readObject();
 			ois.close();
-		
-			logger.log(Level.FINE, deSerMap.toString());
 		} catch (FileNotFoundException e) {
 			logger.log(Level.SEVERE, FILE_NOT_FOUND);
-			
 			e.printStackTrace();
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, IO_SERIALIZATION);
-			
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			logger.log(Level.SEVERE, CLASS_NOT_FOUND);
-
 			e.printStackTrace();
 		}
-		return deSerMap;
+		
+		if (fingerprintMap.size() > 0) {
+			for (Map.Entry<Fingerprint, String> entry : fingerprintMap.entrySet()) {
+				library.addSong(new File(library.getLibraryPath() + "/" + entry.getValue()), entry.getKey());
+			}
+		}
+		
+		return this;
 	}
 }

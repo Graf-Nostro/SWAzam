@@ -72,7 +72,7 @@ public class ClientToPeerRestTest {
 	public void responseJsonTest() {
 		// Get JSON for application		
 		try {
-			File file = new File(PATH + FILE_NAME);
+			File file = new File(PATH + "/" + FILE_NAME);
 			Fingerprint fpRaw = Fingerprinter.getFingerprint(file);
 			
 			//convert Fingerprint to json

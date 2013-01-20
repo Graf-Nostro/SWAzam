@@ -2,10 +2,6 @@ package main.tuwien.ac.at.swazam.peer.music.library;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -21,34 +17,10 @@ import ac.at.tuwien.infosys.swa.audio.FingerprintSystem;
  * Uses a thread to compute the fingerprints
  * 
  * @author Raunig Stefan
+ * @author Florian Eckerstorfer <florian@eckerstorfer.co>
  */
-public class Fingerprinter {
-	  
-	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter");
-	
-	private Map<Fingerprint, String> map = new HashMap<Fingerprint, String>();
-	private final LibrarySerializer libS;
-	private final Library			library;
-	
-	public Fingerprinter(final Library library){	
-		this.library = library;
-		libS = new LibrarySerializer(library);
-		
-		//compute file library
-		if( ! new File( library.getPath() + library.getLibName() ).exists() ) createLibraryFile();
-		
-		//load in file
-		map = libS.deserializeMap();
-	}
-	
-	/**
-	 * compute file library
-	 */
-	public void createLibraryFile(){
-		LibraryWorker th = new LibraryWorker(library);
-		th.run();
-	}
-	
+public class Fingerprinter
+{	
 	/**
 	 * Computes a fingerprint of a music file
 	 *
@@ -61,26 +33,5 @@ public class Fingerprinter {
 		audio = AudioSystem.getAudioInputStream(file);
 		
 		return FingerprintSystem.fingerprint(audio);
-	}
-		
-	/**
-	 * Search the library for a fingerprint match
-	 * 
-	 * @param fp
-	 * @return filename or No match found
-	 */
-	public String matchFingerprintToLibrary(final Fingerprint fp){		
-		logger.log(Level.INFO, "Searching for file");
-		
-		//load in file
-		if( new File( library.getPath() + library.getLibName() ).exists() ) map = libS.deserializeMap();
-		
-		if(map.containsKey(fp)) {
-			logger.log(Level.INFO, "Found one! " + map.get(fp));
-			return map.get(fp);
-		} else {
-			logger.log(Level.INFO, "Found none!");
-			return "No match found";
-		}
 	}
 }

@@ -2,6 +2,8 @@ package main.tuwien.ac.at.swazam.peer.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
 import main.tuwien.ac.at.swazam.peer.connector.ServerNotAvailableException;
@@ -11,8 +13,9 @@ import main.tuwien.ac.at.swazam.peer.connector.ServerNotAvailableException;
  * 
  * @author Florian Eckerstorfer <florian@eckerstorfer.co>
  */
-public class PeerRegistry {
-	
+public class PeerRegistry
+{
+	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.util.PeerRegistry");
 	List<Peer> peers = new ArrayList<Peer>();
 	ServerConnector serverConnector;
 	
@@ -26,6 +29,7 @@ public class PeerRegistry {
 	 * @return
 	 */
 	public PeerRegistry updatePeersFromServer() {
+		logger.log(Level.INFO, "Trying to get peer list from server.");
 		ArrayList<Peer> peers = null;
 		try {
 			peers = serverConnector.getPeers();
@@ -34,7 +38,7 @@ public class PeerRegistry {
 		}
 		
 		for (int i = 0; i < peers.size(); i++) {
-			System.out.println(peers.get(i).getName());
+			logger.log(Level.INFO, "Got peer from server: " + peers.get(i).getName());
 			addPeer(peers.get(i));
 		}
 		
@@ -93,12 +97,13 @@ public class PeerRegistry {
 	}
 	
 	public Peer getRandomPeer() {
-		System.out.println("peer count: " + peers.size());
+		logger.log(Level.INFO, "Selecting random peer. Peer count: " + peers.size());
+		
 		if (peers.size() == 0) {
 			return null;
 		}
 		
-		int index = 0 + (int)(Math.random() * ((peers.size()) + 1));
+		int index = 0 + (int)(Math.random() * ((peers.size()) - 1));
 		return peers.get(index);
 	}
 	

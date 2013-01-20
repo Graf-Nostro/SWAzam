@@ -52,12 +52,5 @@ public class PeerTest {
 		peer.setPort(80);
 		assertEquals(new Integer(80), peer.getPort());
 	}
-	
-	@Test
-	public void testLibrary() {
-		peer.setName("peer1");
-		
-		assertEquals(new String(peer.getName() + "Library.dat"), peer.getLibrary().getLibName());
-	}
 
 }
