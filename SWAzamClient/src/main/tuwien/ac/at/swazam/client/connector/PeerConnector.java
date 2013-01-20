@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import main.tuwien.ac.at.swazam.client.Fingerprinter;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.client.utils.PeerManagement;
-import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
 import main.tuwien.ac.at.swazam.entity.Peer;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
@@ -42,7 +41,7 @@ public class PeerConnector implements IPeerConnector {
 	
 	
 	@Override
-	public Boolean sendMusicRecognitionRequest(File sample) throws PeerNotAvailableException {
+	public String sendMusicRecognitionRequest(File sample) throws PeerNotAvailableException {
 		RESTUtil rest = new RESTUtil();
 		
 		try {
@@ -54,14 +53,14 @@ public class PeerConnector implements IPeerConnector {
 			String url = "http://" + peer.getIp() + ":" + peer.getPort() + "/SWAzamPeer-" + peer.getName() + "/rest/find/music";
 			Response response = rest.post(new URL(url), gson.toJson(fp));
 			
-			logger.info("response CODE = "+response.getCode());
-			logger.info("response MSG = "+response.getMessage());
-			logger.info("response BODY = "+response.getBody());
+//			logger.info("response CODE = "+response.getCode());
+//			logger.info("response MSG = "+response.getMessage());
+//			logger.info("response BODY = "+response.getBody());
 			
 			if (response.getCode() >= 300) {
 				throw new PeerNotAvailableException();
 			} else {
-				return true;
+				return response.getBody();
 			}
 		} catch (MalformedURLException e) {
 			logger.warning("Invalid URL");
@@ -69,7 +68,7 @@ public class PeerConnector implements IPeerConnector {
 			logger.warning("Error when sending request");
 		}
 		
-		return false;
+		return null;
 	}
 	
 	

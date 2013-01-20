@@ -6,5 +6,5 @@ import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 
 public interface IPeerConnector {
 
-	Boolean sendMusicRecognitionRequest(File sample) throws PeerNotAvailableException;
+	String sendMusicRecognitionRequest(File sample) throws PeerNotAvailableException;
 }
