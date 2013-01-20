@@ -4,10 +4,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -46,7 +48,7 @@ public class ClientToPeerREST {
 	// This method is called if JSON is request
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response requestJson(String json) {
+	public Response requestJson(String json, @Context HttpServletRequest request) {
 		// create response obj. with gson to jason format
 		
 		//path user.dir is home dir must add the path manual

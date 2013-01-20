@@ -204,13 +204,13 @@
 		</war>
 	</target>
 	
-	<manifestclasspath property="build-classpath-list" jarfile="${jar-directory}/${project-name}.jar">
+	<manifestclasspath property="build-classpath-list" jarfile="${bin-directory}/${project-name}.jar">
 		<classpath refid="build-classpath" />
 	</manifestclasspath>
 	
 	<target name="jar" depends="compile">
-		<mkdir dir="${jar-directory}"/>
-		<jar destfile="${jar-directory}/${project-name}.jar" basedir="${classes-directory}">
+		<mkdir dir="${bin-directory}"/>
+		<jar destfile="${bin-directory}/${project-name}.jar" basedir="${classes-directory}">
 		<manifest>
 			<attribute name="Main-Class" value="${main-class}"/>
 			<attribute name="Class-Path" value="${build-classpath-list}"/>
@@ -219,7 +219,7 @@
 	</target>	
 	
 	<target name="run-florian" depends="jar">
-		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+		<java jar="${bin-directory}/${project-name}.jar" fork="true">
 			<arg value="start" />
 			<arg value="florian" />
 			<arg value="${peer-url}" />
@@ -230,7 +230,7 @@
 	</target>
 	
 	<target name="run-kung" depends="jar">
-		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+		<java jar="${bin-directory}/${project-name}.jar" fork="true">
 			<arg value="start" />
 			<arg value="kung" />
 			<arg value="${peer-url}" />
@@ -241,7 +241,7 @@
 	</target>
 	
 	<target name="run-stefan" depends="jar">
-		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+		<java jar="${bin-directory}/${project-name}.jar" fork="true">
 			<arg value="start" />
 			<arg value="stefan" />
 			<arg value="${peer-url}" />
@@ -252,7 +252,7 @@
 	</target>
 	
 	<target name="run-andreas" depends="jar">
-		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+		<java jar="${bin-directory}/${project-name}.jar" fork="true">
 			<arg value="start" />
 			<arg value="andreas" />
 			<arg value="${peer-url}" />
@@ -263,7 +263,7 @@
 	</target>
 	
 	<target name="run-adnan" depends="jar">
-		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+		<java jar="${bin-directory}/${project-name}.jar" fork="true">
 			<arg value="start" />
 			<arg value="adnan" />
 			<arg value="${peer-url}" />
