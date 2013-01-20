@@ -23,4 +23,5 @@ SWAzamServer/WebContent/WEB-INF/classes/
 
 # ignore build properties
 build.properties
+tomcat.properties
 

@@ -1,2 +1,4 @@
 project-name=SWAzamPeer
 builder=Florian Eckerstorfer
+server-url=http://localhost:8080/SWAzamServer
+library-directory=/Users/florian/Workspace/study/11-ws2012/SWAzam/SWAzamClient/library
