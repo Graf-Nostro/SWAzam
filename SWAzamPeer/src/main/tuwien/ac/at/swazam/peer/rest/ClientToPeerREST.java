@@ -48,17 +48,18 @@ public class ClientToPeerREST {
 	// This method is called if JSON is request
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
+
 	public Response requestJson(String json, @Context HttpServletRequest request) {
 		// create response obj. with gson to jason format
 		
 		//path user.dir is home dir must add the path manual
-		//String PATH = System.getProperty("user.dir")+"/library/";
-		
+		//String PATH = System.getProperty("user.dir")+"/library/";		
+				
 		/**
 		 * DEBUG
 		 */
 		String PATH = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
-		Peer peer = new Peer("peer2", "localhost", 8080);
+		Peer p = new Peer("peer2", "localhost", 8080);
 		
 		List<File> songs = new ArrayList<File>();
 		songs.add(new File( "b01.wav") );
@@ -66,7 +67,7 @@ public class ClientToPeerREST {
 		songs.add(new File( "d01.wav") );
 		songs.add(new File( "f01.wav") );
 		
-		Library library = new Library(peer, songs);
+		Library library = new Library(p, songs);
 		library.setPath(PATH);
 		
 		Fingerprinter fprinter = new Fingerprinter(library);

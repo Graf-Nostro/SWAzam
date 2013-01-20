@@ -47,7 +47,11 @@ public class MainPeer {
 			ip = "localhost";
 		}
 		if (args.length == 4) {
-			port = new Integer(args[3]);
+			try{
+				port = new Integer(args[3]);
+			} catch (NumberFormatException ex) {
+				port = 8080;
+			}
 		} else {
 			port = 8080;
 		}

@@ -80,8 +80,7 @@ public class ClientToPeerRestTest {
 			String json = gson.toJson(fpRaw);
 			
 			//send to REST endpoint
-			ClientResponse response = service.path("rest/").path("find/music").accept(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);  
-			
+			ClientResponse response = service.path("rest/").path("find/music").accept(MediaType.APPLICATION_JSON).post(ClientResponse.class, json);
 			// Return code should be 201 == created resource
 			assertEquals(OK201, response.getStatus());
 			
