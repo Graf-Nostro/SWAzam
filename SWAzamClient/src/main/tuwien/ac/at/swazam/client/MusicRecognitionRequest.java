@@ -7,9 +7,9 @@ import java.util.logging.Logger;
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
-import main.tuwien.ac.at.swazam.client.connector.Request;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.client.utils.ClientUtils;
+import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
 
 public class MusicRecognitionRequest {
 	
@@ -39,10 +39,10 @@ public class MusicRecognitionRequest {
 	}
 	
 	public Boolean sendRequest(File requestFile) {
-		
+/*		
 		try {
 			Fingerprint fp = Fingerprinter.getFingerprint(requestFile);
-			Boolean result = peerConnector.sendRequest(new Request(fp));
+			Boolean result = peerConnector.sendMusicRecognitionRequest(new PeerRequest(fp));
 
 			if(result) {
 				logger.info("Request sent successfully");
@@ -55,7 +55,7 @@ public class MusicRecognitionRequest {
 			logger.warning("Peer not available");
 			e.printStackTrace();
 		}
-		
+		*/
 		return false;
 	}
 	
