@@ -40,8 +40,6 @@ public class FingerprinterLibraryTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		System.out.println(PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("server-url"));
-		System.out.println(PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory"));
 		Peer peer = new Peer("peer1", "localhost", 8080);
 		
 		List<File> files = new ArrayList<File>();
