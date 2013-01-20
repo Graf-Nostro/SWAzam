@@ -1,5 +1,10 @@
 package main.tuwien.ac.at.swazam.peer.util;
 
+import java.io.File;
+import java.util.List;
+
+import main.tuwien.ac.at.swazam.peer.music.library.Library;
+
 /**
  * Peer object.
  * 
@@ -7,13 +12,12 @@ package main.tuwien.ac.at.swazam.peer.util;
  */
 public class Peer {
 	
-	private String ip;
+	private String  ip;
 	private Integer port;
-	private String name;
+	private String  name;
 	
-	public Peer() {
-	}
-		
+	private Library library;
+			
 	/**
 	 * Initializes a peer with name, IP address and port.
 	 * 
@@ -25,6 +29,8 @@ public class Peer {
 		setName(name);
 		setIp(ip);
 		setPort(port);
+		
+		library = new Library(this);
 	}
 	
 	/**
@@ -85,5 +91,39 @@ public class Peer {
 	 */
 	public Integer getPort() {
 		return port;
+	}
+	
+	/**
+	 * Retunrs the library
+	 * 
+	 * @return
+	 */
+	public Library getLibrary(){
+		return this.library;
+	}
+	
+	/**
+	 * Sets library
+	 * 
+	 * @param library
+	 */
+	public void setLibrary(final Library library){
+		this.library = library;
+	}
+	
+	/**
+	 * 
+	 * @param file
+	 */
+	public void addFile(final File file){
+		this.library.addSong(file);
+	}
+	
+	/**
+	 * 
+	 * @param files
+	 */
+	public void addFiles(final List<File> files){
+		this.library.addSongs(files);
 	}
 }

@@ -20,7 +20,7 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
  * 
  * @author Raunig Stefan
  */
-public class LibraryThread extends Thread {
+public class LibraryWorker {
 
 	private static final Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.music.library.Librarythread.class");
 	
@@ -29,20 +29,20 @@ public class LibraryThread extends Thread {
 	private Map<Fingerprint, String> map = new HashMap<Fingerprint, String>();
 	private final LibrarySerializer  libS;
 	
-	public LibraryThread(final Library library){
+	
+	public LibraryWorker(final Library library){
 		this.library = library;
 		
 		 libS = new LibrarySerializer(this.library);
 	}
 	
-	@Override
 	public void run() {
 		logger.log(Level.INFO, "Thread is running and computing fingerprints");
 		
+		logger.log(Level.INFO, "\n" + library.listSongs());
+		
 		for(File f: library.getSongs()){
 			try {
-				logger.log(Level.INFO, "\n" + library.listSongs());		
-				
 				//compute fingerprint
 				Fingerprint fpRaw = Fingerprinter.getFingerprint(f);
 				

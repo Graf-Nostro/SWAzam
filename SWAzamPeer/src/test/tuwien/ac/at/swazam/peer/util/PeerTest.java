@@ -19,7 +19,7 @@ public class PeerTest {
 
 	@Before
 	public void setUp() throws Exception {
-		peer = new Peer();
+		peer = new Peer("", "", 0);
 	}
 
 	@After
@@ -51,6 +51,13 @@ public class PeerTest {
 	public void testSetPort() {
 		peer.setPort(80);
 		assertEquals(new Integer(80), peer.getPort());
+	}
+	
+	@Test
+	public void testLibrary() {
+		peer.setName("peer1");
+		
+		assertEquals(new String(peer.getName() + "Library.dat"), peer.getLibrary().getLibName());
 	}
 
 }
