@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -26,8 +24,6 @@ import main.tuwien.ac.at.swazam.util.PropertyReader;
  */
 public class Library implements ILibrary
 {
-	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.music.library.Library");
-	
 	private Peer peer;
 	private List<File> songs;
 	private String libraryPath;
