@@ -38,11 +38,11 @@ public class FingerprinterLibraryTest {
 	public void setUp() throws Exception {
 		Peer peer = new Peer("peer2", "localhost", 8080);
 		library = peer.getLibrary();
-		library.addSong(new File(PATH + FILE_NAME1));
-		library.addSong(new File(PATH + FILE_NAME2));
-		library.addSong(new File(PATH + FILE_NAME3));
-		library.addSong(new File(PATH + FILE_NAME4));
-		library.addSong(new File(PATH + FILE_NAME5));
+		library.addSong(new File(PATH + "/" + FILE_NAME1));
+		library.addSong(new File(PATH + "/" + FILE_NAME2));
+		library.addSong(new File(PATH + "/" + FILE_NAME3));
+		library.addSong(new File(PATH + "/" + FILE_NAME4));
+		library.addSong(new File(PATH + "/" + FILE_NAME5));
 	}
 	
 	@After

@@ -1,13 +1,5 @@
 package main.tuwien.ac.at.swazam.peer.rest;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -19,12 +11,9 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
-import main.tuwien.ac.at.swazam.peer.MainPeer;
-import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
-import main.tuwien.ac.at.swazam.peer.music.library.Library;
+import main.tuwien.ac.at.swazam.peer.music.library.LibrarySerializer;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.peer.util.PeerCreator;
-import main.tuwien.ac.at.swazam.util.PropertyReader;
 
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
@@ -55,10 +44,11 @@ public class ClientToPeerREST {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response requestJson(String json, @Context HttpServletRequest request) {
-		Peer peer = new PeerCreator().createFromRequest(request);		
-		Library library = peer.getLibrary();
+		Peer peer = new PeerCreator().createFromRequest(request);
+		new LibrarySerializer(peer.getLibrary()).deserialize();
+		
 		Fingerprint fingerprint = new Gson().fromJson(json, Fingerprint.class);
-		String result = library.matchFingerprint(fingerprint);
+		String result = peer.getLibrary().matchFingerprint(fingerprint);
 
 		return Response.status(201).entity(result).build();
 	}

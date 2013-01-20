@@ -44,7 +44,7 @@ public class ClientToPeerRestTest {
 	public void setUp() throws Exception {
 		config  = new DefaultClientConfig();
 		client  = Client.create(config);
-		service = client.resource(UriBuilder.fromUri("http://localhost:8080/SWAzamPeer").build());
+		service = client.resource(UriBuilder.fromUri("http://localhost:8080/SWAzamPeer-florian").build());
 	}
 	
 	@After
@@ -72,7 +72,7 @@ public class ClientToPeerRestTest {
 	public void responseJsonTest() {
 		// Get JSON for application		
 		try {
-			File file = new File(PATH + FILE_NAME);
+			File file = new File(PATH + "/" + FILE_NAME);
 			Fingerprint fpRaw = Fingerprinter.getFingerprint(file);
 			
 			//convert Fingerprint to json
