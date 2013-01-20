@@ -44,7 +44,7 @@ public class ClientToPeerRestTest {
 	public void setUp() throws Exception {
 		config  = new DefaultClientConfig();
 		client  = Client.create(config);
-		service = client.resource(UriBuilder.fromUri("http://localhost:8080/SWAzamPeer-florian").build());
+		service = client.resource(UriBuilder.fromUri("http://localhost:8080/SWAzamPeer").build());
 	}
 	
 	@After
