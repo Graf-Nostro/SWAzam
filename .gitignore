@@ -11,8 +11,14 @@ fingerprint-0.1-javadoc.jar
 
 # ignore binaries
 
+*.war
 SWAzamClient/bin
 SWAZamPeer/bin
 SWAzamPeer/build
+SWAzamPeer/WebContent/WEB-INF/classes/
 SWAZamServer/bin
 SWAzamServer/build
+
+# ignore build properties
+SWAzamPeer/build.properties
+

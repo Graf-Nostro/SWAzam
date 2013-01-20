@@ -1,0 +1,5 @@
+project-name=SWAzamPeer
+builder=Florian Eckerstorfer
+tomcat-manager-url=http://localhost:8080/manager/text
+tomcat-manager-username=admin
+tomcat-manager-password=secret
