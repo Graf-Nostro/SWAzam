@@ -30,7 +30,7 @@ public class PropertyReader {
 	}
 	
 	protected void readPropertyFile() {
-		InputStream inputStream = getClass().getClassLoader().getResourceAsStream(propertyFile);
+		InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(propertyFile);
 		properties = new Properties();    
     
         try {
