@@ -11,7 +11,7 @@ public class User {
 	public static final String NAME_FIELD_NAME = "name";
 	public static final String PASSWORD_FIELD_NAME = "passwd";
 	public static final String COINS_FIELD_NAME = "coins";
-		
+	
 	@DatabaseField(columnName = NAME_FIELD_NAME, canBeNull = false, id = true)
 	private	String name = "";
 	

@@ -46,7 +46,7 @@ public class RESTUserManagement {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new Viewable("/../../welcome-file.jsp", null);
+		return new Viewable("/../../index.html", null);
 	}
 	
 	@POST
@@ -64,18 +64,21 @@ public class RESTUserManagement {
 		//request.setAttribute("obj", new String("IT Works"));
 		System.out.println("/REGISTER called with " + name + " and " + passwd);
 		
-		return new Viewable("/../../welcome-file.jsp", null);
+		return new Viewable("/../../index.html", null);
 	}
 	
 	@POST
 	@Path("/update/{oldname}")
 	public Viewable update(@PathParam("oldname") String oldname, @FormParam("name") String name, @FormParam("oldpasswd") String oldpasswd, @FormParam("newpasswd") String newpasswd) {
+
+		System.out.println("/update called with oldname " + oldname + " and name " + name + " and oldpw " + oldpasswd + " and " + newpasswd);
 		try {
 			user = new CoreUserManagement();
 			if (user.getUserbyId(oldname).getPassword().equals(new String(Base64.encode(oldpasswd.getBytes())))) {
+				System.out.println("updateing ");
 				User usr = user.getUserbyId(oldname);
-				usr.setName(name);
-				usr.setPassword(new String(Base64.encode(newpasswd.getBytes())));
+				if (name != "") usr.setName(name);
+				if (newpasswd != "") usr.setPassword(new String(Base64.encode(newpasswd.getBytes())));
 				user.updateUser(usr);
 			}	
 		} catch (Exception e) {
@@ -84,7 +87,6 @@ public class RESTUserManagement {
 		}
 		
 		//request.setAttribute("obj", new String("IT Works"));
-		System.out.println("/update called with " + name + " and " + newpasswd);
 		
 		return new Viewable("/../../welcome-file.jsp", null);
 	}
