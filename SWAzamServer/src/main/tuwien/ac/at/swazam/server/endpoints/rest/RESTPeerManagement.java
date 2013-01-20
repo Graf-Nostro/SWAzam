@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import main.tuwien.ac.at.swazam.server.core.CorePeerManagement; 
+import main.tuwien.ac.at.swazam.server.core.CoreUserManagement;
 import main.tuwien.ac.at.swazam.server.user.Peer;
 
 import com.google.gson.Gson; 
@@ -61,4 +62,31 @@ public class RESTPeerManagement {
 		
 		return gson.toJson(peerManagement.getPeers());
 	}
+	
+	/*Server akzeptiert einen PeerLookup Request des Clients (#13)*/
+	@PUT
+	@Path("/lookup")
+	public Peer lookup(String request) {
+		/* Request Body:
+		 * {"username":"pw"} */
+		System.out.println("printing out request: " + request);
+		Peer peer = null;
+		try {
+			peerManagement = new CorePeerManagement();
+			CoreUserManagement user = new CoreUserManagement();
+			Gson gson = new Gson();
+			String[] data = gson.fromJson(request, String[].class); 
+			if ( user.checkLogin(data[0], data[1]) ) {
+				peer = gson.fromJson(request, Peer.class);
+				return peerManagement.getRandomPeer();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		System.out.println("/lookup called ");
+		
+		return peer;
+	}
+	
 }

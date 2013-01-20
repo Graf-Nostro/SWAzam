@@ -26,7 +26,7 @@
     		<form id="edituser" action="update/<c:out value="${name}"/>" method="post">
 			    <h2>EDIT Name/Password</h2>
 			    <fieldset id="inputs">
-			        Username: <input id="username" type="text" name="name" value="<c:out value="${name}"/>" placeholder="Username" autofocus required>   
+			        Username: <input id="username" type="text" name="name" value="<c:out value="${name}"/>" placeholder="Username" readonly>   
 			        OldPassword: <input id="password" type="password" name="oldpasswd" placeholder="OldPassword" required>
 			        NewPassword: <input id="password" type="password" name="newpasswd" placeholder="NewPassword" required>
 			    </fieldset>

@@ -1,5 +1,10 @@
 package main.tuwien.ac.at.swazam.server.core;
 
+import java.sql.SQLException;
+import java.util.logging.Logger;
+
+import main.tuwien.ac.at.swazam.server.user.User;
+
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
@@ -7,18 +12,11 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
-import java.sql.SQLException;
-import java.util.logging.Logger;
-
-import main.tuwien.ac.at.swazam.server.user.SongRequest;
-import main.tuwien.ac.at.swazam.server.user.User;
-
 public class CoreUserManagement {
 	private final Logger LOG = Logger.getLogger(CoreUserManagement.class.getName());
 	private final static String DATABASE_URL = "jdbc:sqlite:user";
 	
 	private Dao<User, String> userDao;
-	private Dao<SongRequest, Integer> songDao;
 	
 	/***** CONSTRUCTOR CASE HANDLING
 	 * @throws Exception ********/
@@ -53,7 +51,6 @@ public class CoreUserManagement {
 			//userDao = DaoManager.lookupDao(connectionSource, User.class);
 			//songDao = DaoManager.lookupDao(connectionSource, SongRequest.class);
 			userDao = DaoManager.createDao(connectionSource, User.class);
-			songDao = DaoManager.createDao(connectionSource, SongRequest.class);
 			
 			LOG.info("\n\nDatabase Connection seems to have worked\n\n");
 		} catch (Exception e) {
@@ -73,9 +70,8 @@ public class CoreUserManagement {
 	private void setupDatabase(ConnectionSource connectionSource) throws Exception {
 		// if you need to create the table
 		TableUtils.createTableIfNotExists(connectionSource, User.class);
-		TableUtils.createTableIfNotExists(connectionSource, SongRequest.class);
 	}
-	
+		
 	public boolean createUser(String username, String password) {
 		User user = new User(username, new String(Base64.encode(password.getBytes())));
 		// persist the account object to the database
@@ -128,7 +124,9 @@ public class CoreUserManagement {
 		User user = null;
 		// retrieve the account from the database by its id field (name)
         try {
-			user = userDao.queryForId(userid);
+        	//QueryBuilder<User, String> queryBuilder = userDao.queryBuilder();
+        	//user = queryBuilder.where().eq(User.NAME_FIELD_NAME, userid);
+        	user = userDao.queryForId(userid);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
