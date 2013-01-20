@@ -40,7 +40,8 @@ public class FingerprinterLibraryTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		Peer peer = new Peer("peer1", "localhost", 8080);
+		
+		Peer peer = new Peer("peer2", "localhost", 8080);
 		
 		List<File> files = new ArrayList<File>();
 		
