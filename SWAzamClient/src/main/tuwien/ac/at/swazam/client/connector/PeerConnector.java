@@ -49,16 +49,18 @@ public class PeerConnector implements IPeerConnector {
 			
 			logger.info("response code = "+response.getCode());
 			
-			if (response.getCode() != 200) {
+			if (response.getCode() >= 300)
 				throw new PeerNotAvailableException();
-			}
+			
+			else
+				return true;
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return true;
+		return false;
 	}
 	
 	

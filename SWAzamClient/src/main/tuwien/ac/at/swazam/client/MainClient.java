@@ -14,6 +14,7 @@ import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.Request;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
+import main.tuwien.ac.at.swazam.client.ui.ClientUI;
 
 
 public class MainClient {
@@ -46,12 +47,12 @@ public class MainClient {
 		
 		else {
 			// GUI code
-			logger.info("GUI");
+			logger.info("ClientUI");
 			
 			EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
-						GUI frame = new GUI();
+						ClientUI frame = new ClientUI();
 						frame.setVisible(true);
 					} catch (Exception e) {
 						e.printStackTrace();
