@@ -6,9 +6,9 @@ import java.util.logging.Logger;
 
 import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
-import main.tuwien.ac.at.swazam.client.connector.Request;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.client.utils.ClientUtils;
+import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
 
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
@@ -32,15 +32,12 @@ public class ClientThread implements Runnable {
 		try {
 			
 			logger.info("path = "+ClientUtils.getFilePath()+sample);
-			Fingerprint fp = Fingerprinter.getFingerprint(new File(ClientUtils.getFilePath()+sample));
-			Boolean result = peerConnector.sendRequest(new Request(fp));
+			Boolean result = peerConnector.sendMusicRecognitionRequest(new File(ClientUtils.getFilePath()+sample));
 			
 			if(result) {
 				logger.info("Request sent successfully");
 			}
 			
-		} catch (IOException e) {
-			logger.severe("Fingerprint error");
 		} catch (PeerNotAvailableException e) {
 			logger.warning("Peer not available");
 			e.printStackTrace();

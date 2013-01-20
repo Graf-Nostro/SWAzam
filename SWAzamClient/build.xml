@@ -33,7 +33,7 @@
 	</target>
 	
 	<manifestclasspath property="build-classpath-list" jarfile="${jar-directory}/${project-name}.jar">
-		<classpath refid="build-classpath" />
+		<classpath refid="classpath" />
 	</manifestclasspath>
 	
 	<target name="jar" depends="compile">

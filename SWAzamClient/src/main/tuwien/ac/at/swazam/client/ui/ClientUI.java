@@ -11,6 +11,15 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import main.tuwien.ac.at.swazam.client.MusicRecognitionRequest;
+import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
+import main.tuwien.ac.at.swazam.client.connector.IServerConnector;
+import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
+import main.tuwien.ac.at.swazam.client.connector.ServerConnector;
+import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
+import main.tuwien.ac.at.swazam.client.utils.MusicRequestWrapper;
+import main.tuwien.ac.at.swazam.client.utils.PeerManagement;
+import main.tuwien.ac.at.swazam.client.utils.PeerRequestHandler;
+import main.tuwien.ac.at.swazam.client.utils.UserManagement;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JFileChooser;
@@ -54,7 +63,12 @@ public class ClientUI extends JFrame implements ActionListener {
 	private final JFileChooser fc;
 	private final JButton btnRecord;
 	
-	private final MusicRecognitionRequest request;
+	private MusicRequestWrapper musicRequest;
+	
+	private PeerRequestHandler peerRequestHandler;
+	
+	private final IPeerConnector peerConnector;
+	private final IServerConnector serverConnector;
 	
 
 
@@ -134,8 +148,16 @@ public class ClientUI extends JFrame implements ActionListener {
 		btnRecord.addActionListener(this);
 		btnSubmit.addActionListener(this);
 		
-		request = new MusicRecognitionRequest();
+		musicRequest = new MusicRequestWrapper();
 		
+		UserManagement.setUsername("Andi");
+		UserManagement.setPassword("1234");
+		
+		peerConnector = new PeerConnector();
+		serverConnector = new ServerConnector();
+		
+		peerRequestHandler = new PeerRequestHandler(serverConnector);
+		peerRequestHandler.start();
 	}
 
 
@@ -147,7 +169,7 @@ public class ClientUI extends JFrame implements ActionListener {
 			
 			if(val == JFileChooser.APPROVE_OPTION) {
 				File requestFile = fc.getSelectedFile();
-				request.setFile(requestFile);
+				musicRequest.setSample(requestFile);
 				lblSample.setText("Chosen sample: "+requestFile.getName());
 			}
 			else
@@ -155,13 +177,22 @@ public class ClientUI extends JFrame implements ActionListener {
 		}
 		
 		if(e.getSource() == btnSubmit) {
-			if(request.getFile() == null)
+			if(musicRequest.getSample() == null)
 				JOptionPane.showMessageDialog(this, "Please choose a sample file first", "Selecting file", JOptionPane.INFORMATION_MESSAGE);
 			
 			else {
+				if(!PeerManagement.isPeerAvailable()) {
+					JOptionPane.showMessageDialog(this, "No peers available, try again later.", "Request delayed", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
 				lblStatus.setText("Sending request ...");
 				
-				boolean result = request.sendRequest();
+				boolean result = false;
+				try {
+					result = peerConnector.sendMusicRecognitionRequest(musicRequest.getSample());
+				} catch (PeerNotAvailableException e1) {
+					logger.warning("Sending music recognition request failed");
+				}
 				
 				if(result) {
 					JOptionPane.showMessageDialog(this, "Request sent successfully", "Sending request", JOptionPane.INFORMATION_MESSAGE);
@@ -172,7 +203,6 @@ public class ClientUI extends JFrame implements ActionListener {
 					JOptionPane.showMessageDialog(this, "Request failed", "Request not successful", JOptionPane.ERROR_MESSAGE);
 					lblStatus.setText("Request failed");
 				}
-				
 			}
 		}
 	}

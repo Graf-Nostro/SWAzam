@@ -23,6 +23,10 @@ public class RESTUtil {
 		return execute(url, "PUT", content);
 	}
 	
+	public Response post(URL url, String content) throws IOException {
+		return execute(url, "POST", content);
+	}
+	
 	protected Response execute(URL url, String method) throws IOException {
 		return execute(url, method, null);
 	}

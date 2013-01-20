@@ -1,11 +1,15 @@
 package main.tuwien.ac.at.swazam.client.connector;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
 
+import main.tuwien.ac.at.swazam.client.Fingerprinter;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
+import main.tuwien.ac.at.swazam.client.utils.PeerManagement;
+import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
 
@@ -37,15 +41,15 @@ public class PeerConnector implements IPeerConnector {
 	
 	
 	@Override
-	public Boolean sendRequest(Request request) throws PeerNotAvailableException {
+	public Boolean sendMusicRecognitionRequest(File sample) throws PeerNotAvailableException {
 		RESTUtil rest = new RESTUtil();
 		
 		try {
 			Gson gson = new Gson();
 			
-			Fingerprint fp = request.getFingerprint();
+			Fingerprint fp = Fingerprinter.getFingerprint(sample);
 			
-			Response response = rest.post(new URL(peerURL + "/rest/find/music "), gson.toJson(fp));
+			Response response = rest.post(new URL(PeerManagement.getPeer().getIp() + "/rest/find/music "), gson.toJson(fp));
 			
 			logger.info("response code = "+response.getCode());
 			
