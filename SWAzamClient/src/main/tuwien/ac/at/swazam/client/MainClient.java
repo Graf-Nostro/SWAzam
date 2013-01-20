@@ -28,7 +28,7 @@ public class MainClient {
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		IPeerConnector peerConnector = new PeerConnector("http://localhost:8081/SWAzamPeer");
+		IPeerConnector peerConnector = new PeerConnector("http://localhost:8080/SWAzamPeer");
 		
 		Fingerprint fp = Fingerprinter.getFingerprint(new File(System.getProperty("user.dir")+"/library/f01small.wav"));
 		Request request = new Request(fp);

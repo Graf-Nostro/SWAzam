@@ -53,7 +53,7 @@ public class ClientToPeerREST {
 		/**
 		 * DEBUG
 		 */
-		String PATH = "/home/user/Programmieren/workspace/SWAzam/SWAzamPeer/library/";
+		String PATH = "/library/";
 		Peer peer = new Peer("peer2", "localhost", 8080);
 		
 		List<File> songs = new ArrayList<File>();
