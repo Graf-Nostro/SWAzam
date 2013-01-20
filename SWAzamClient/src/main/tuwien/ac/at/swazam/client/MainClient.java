@@ -1,5 +1,6 @@
 package main.tuwien.ac.at.swazam.client;
 
+import java.awt.EventQueue;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -17,34 +18,49 @@ import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 
 public class MainClient {
 
-	
-	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.client.MainClient");
-	
-	
-	/**
-	 * @param args
-	 * @throws IOException 
-	 * @throws UnsupportedAudioFileException 
-	 */
-	public static void main(String[] args) throws IOException {
-		
-		IPeerConnector peerConnector = new PeerConnector("http://localhost:8080/SWAzamPeer");
-		
-		Fingerprint fp = Fingerprinter.getFingerprint(new File(System.getProperty("user.dir")+"/library/f01small.wav"));
-		Request request = new Request(fp);
-		
-		try {
-			Boolean response = peerConnector.sendRequest(request);
-			if(response)
-				logger.fine("request successful!");
-			
-			else
-				logger.fine("request NOT successful");
-				
-		} catch (PeerNotAvailableException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+
+    private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.client.MainClient");
+
+
+    /**
+     * @param args
+     * @throws IOException
+     * @throws UnsupportedAudioFileException
+     */
+    public static void main(String[] args) throws IOException {
+
+        if(args.length == 2) {
+
+            if(args[0].equals("query"))
+                new Thread(new ClientThread(args[1])).start();
+
+            else
+                logger.info("usage cmdline: java main.tuwien.ac.at.swazam.client.MainClient query filename.wav\n" +
+                        "usage gui: java main.tuwien.ac.at.swazam.client.MainClient");
+
+        }
+
+        else if(args.length != 0)
+            logger.info("usage cmdline: java main.tuwien.ac.at.swazam.client.MainClient query filename.wav\n" +
+                    "usage gui: java main.tuwien.ac.at.swazam.client.MainClient");
+
+        else {
+            // GUI code
+            logger.info("GUI");
+
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    try {
+                        GUI frame = new GUI();
+                        frame.setVisible(true);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+        }
+
+    }
 
 }

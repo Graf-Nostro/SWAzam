@@ -4,6 +4,7 @@ public class ClientUtils {
 
 	private static final String ip = "127.0.0.1";
 	private static final int port = 80;
+	private static final String filePath = System.getProperty("user.dir") + "/library/";
 	
 	
 	/**
@@ -22,4 +23,11 @@ public class ClientUtils {
 	}
 	
 	
+	/**
+	 * 
+	 * @return the filePath
+	 */
+	public static String getFilePath() {
+		return filePath;
+	}
 }

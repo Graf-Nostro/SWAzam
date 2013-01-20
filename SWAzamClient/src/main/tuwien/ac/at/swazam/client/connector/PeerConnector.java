@@ -9,6 +9,8 @@ import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
 
+import ac.at.tuwien.infosys.swa.audio.Fingerprint;
+
 import com.google.gson.Gson;
 
 public class PeerConnector implements IPeerConnector {
@@ -40,9 +42,12 @@ public class PeerConnector implements IPeerConnector {
 		
 		try {
 			Gson gson = new Gson();
-			Response response = rest.put(new URL(peerURL + "/rest/find/music "), gson.toJson(request));
 			
-			logger.finest("response code = "+response.getCode());
+			Fingerprint fp = request.getFingerprint();
+			
+			Response response = rest.post(new URL(peerURL + "/rest/find/music "), gson.toJson(fp));
+			
+			logger.info("response code = "+response.getCode());
 			
 			if (response.getCode() != 200) {
 				throw new PeerNotAvailableException();
