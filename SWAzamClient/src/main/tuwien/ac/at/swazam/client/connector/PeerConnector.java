@@ -54,7 +54,9 @@ public class PeerConnector implements IPeerConnector {
 			String url = "http://" + peer.getIp() + ":" + peer.getPort() + "/SWAzamPeer-" + peer.getName() + "/rest/find/music";
 			Response response = rest.post(new URL(url), gson.toJson(fp));
 			
-			logger.info("response code = "+response.getCode());
+			logger.info("response CODE = "+response.getCode());
+			logger.info("response MSG = "+response.getMessage());
+			logger.info("response BODY = "+response.getBody());
 			
 			if (response.getCode() >= 300) {
 				throw new PeerNotAvailableException();
