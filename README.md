@@ -10,6 +10,8 @@ Deploy & run SWAzam
 ./scripts/deploy-server.sh
 ```
 
+You need to visit the web interface (for example http://localhost:8080/SWAzamServer) and register at least one user. A user with username "admin" and password "admin" is required for testing purposes.
+
 ### Compile & deploy 5 peers
 
 This scripts deploys 5 different peers and allows adds some sample files to the media libraries of the peers.

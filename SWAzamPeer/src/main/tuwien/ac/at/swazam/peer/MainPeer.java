@@ -52,7 +52,7 @@ public class MainPeer {
 			System.exit(-1);
 		}
 		
-		System.out.println("\n\nShutdown. Thank you very much.");
+		System.out.println("\nFinished. Thank you very much.");
 		System.exit(0);
 	}
 	

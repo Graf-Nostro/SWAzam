@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cd SWAzamClient/
-ant run
+mkdir -p build/jar
+ant compile run
