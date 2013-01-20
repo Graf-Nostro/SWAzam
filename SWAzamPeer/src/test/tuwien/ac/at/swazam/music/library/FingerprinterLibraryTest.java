@@ -36,6 +36,7 @@ public class FingerprinterLibraryTest {
 	
 	@Before
 	public void setUp() throws Exception {
+		//setup
 		Peer peer = new Peer("peer2", "localhost", 8080);
 		library = peer.getLibrary();
 		library.addSong(new File(PATH + "/" + FILE_NAME1));
