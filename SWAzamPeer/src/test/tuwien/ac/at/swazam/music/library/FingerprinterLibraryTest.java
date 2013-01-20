@@ -11,9 +11,11 @@ import java.util.List;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import main.tuwien.ac.at.swazam.peer.MainPeer;
 import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
 import main.tuwien.ac.at.swazam.peer.music.library.Library;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
+import main.tuwien.ac.at.swazam.util.PropertyReader;
 
 import org.junit.After;
 import org.junit.Before;
@@ -25,7 +27,7 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 public class FingerprinterLibraryTest {
 
-	private String PATH = System.getProperty("user.dir") + "/library/";
+	private String PATH = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
 	
 	private final String FILE_NAME1 = "j01.wav";
 	private final String FILE_NAME2 = "f01small.wav";
@@ -38,7 +40,8 @@ public class FingerprinterLibraryTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		
+		System.out.println(PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("server-url"));
+		System.out.println(PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory"));
 		Peer peer = new Peer("peer1", "localhost", 8080);
 		
 		List<File> files = new ArrayList<File>();

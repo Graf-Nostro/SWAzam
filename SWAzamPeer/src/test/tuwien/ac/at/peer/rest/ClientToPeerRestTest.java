@@ -9,7 +9,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
 
+import main.tuwien.ac.at.swazam.peer.MainPeer;
 import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
+import main.tuwien.ac.at.swazam.util.PropertyReader;
 
 import org.junit.After;
 import org.junit.Before;
@@ -35,7 +37,7 @@ public class ClientToPeerRestTest {
 	
 	private final int OK201 = 201;
 	
-	private final String PATH = System.getProperty("user.dir")+"/library/";
+	private final String PATH = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
 	private final String FILE_NAME = "f01small.wav";
 	
 	@Before

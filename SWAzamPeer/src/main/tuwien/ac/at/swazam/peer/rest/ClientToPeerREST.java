@@ -13,9 +13,11 @@ import javax.ws.rs.core.Response;
 
 import com.google.gson.Gson;
 
+import main.tuwien.ac.at.swazam.peer.MainPeer;
 import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
 import main.tuwien.ac.at.swazam.peer.music.library.Library;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
+import main.tuwien.ac.at.swazam.util.PropertyReader;
 
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
@@ -53,7 +55,7 @@ public class ClientToPeerREST {
 		/**
 		 * DEBUG
 		 */
-		String PATH = "/library/";
+		String PATH = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
 		Peer peer = new Peer("peer2", "localhost", 8080);
 		
 		List<File> songs = new ArrayList<File>();

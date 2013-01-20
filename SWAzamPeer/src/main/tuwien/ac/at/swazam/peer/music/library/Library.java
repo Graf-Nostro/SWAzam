@@ -4,7 +4,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.tuwien.ac.at.swazam.peer.MainPeer;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
+import main.tuwien.ac.at.swazam.util.PropertyReader;
 
 /**
  * 
@@ -18,7 +20,7 @@ public class Library implements ILibrary {
 	
 	private List<File> songs = new ArrayList<File>();
 	
-	private String libPath = System.getProperty("user.dir") + "/library/";
+	private String libPath = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
 	private String libName;
 	
 	public Library(final Peer peer){
