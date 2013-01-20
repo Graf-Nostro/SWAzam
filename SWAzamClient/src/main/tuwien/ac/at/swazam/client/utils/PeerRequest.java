@@ -4,62 +4,20 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 public class PeerRequest {
 	
-	private String ip;
-	private int port;
-	private Fingerprint fingerprint;
+	private String username;
+	private String password;
 	
 	
-	public PeerRequest(Fingerprint fp) {
-		this(ClientUtils.getIp(), ClientUtils.getPort(), fp);
+	public PeerRequest() {
+		this.username = UserManagement.getUsername();
+		this.password = UserManagement.getPassword();
 	}
 	
-	public PeerRequest(String ip, int port, Fingerprint fp) {
-		this.ip = ip;
-		this.port = port;
-		this.fingerprint = fp;
+	public PeerRequest(String username, String password) {
+		this.username = username;
+		this.password = password;
 	}
 
-	/**
-	 * @return the ip
-	 */
-	public String getIp() {
-		return ip;
-	}
-
-	/**
-	 * @param ip the ip to set
-	 */
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	/**
-	 * @return the port
-	 */
-	public int getPort() {
-		return port;
-	}
-
-	/**
-	 * @param port the port to set
-	 */
-	public void setPort(int port) {
-		this.port = port;
-	}
-
-	/**
-	 * @return the fingerprint
-	 */
-	public Fingerprint getFingerprint() {
-		return fingerprint;
-	}
-
-	/**
-	 * @param fingerprint the fingerprint to set
-	 */
-	public void setFingerprint(Fingerprint fingerprint) {
-		this.fingerprint = fingerprint;
-	}
 	
 
 }

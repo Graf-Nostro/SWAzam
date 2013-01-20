@@ -35,5 +35,9 @@ public class UserManagement {
 	}
 	
 	
+	public static Boolean isLoginDataAvailable() {
+		return username != null  &&  password != null;
+	}
+	
 	
 }

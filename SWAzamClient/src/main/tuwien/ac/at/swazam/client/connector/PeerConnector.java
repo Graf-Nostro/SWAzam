@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 
 import main.tuwien.ac.at.swazam.client.Fingerprinter;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
+import main.tuwien.ac.at.swazam.client.utils.PeerManagement;
 import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
@@ -48,7 +49,7 @@ public class PeerConnector implements IPeerConnector {
 			
 			Fingerprint fp = Fingerprinter.getFingerprint(sample);
 			
-			Response response = rest.post(new URL(peerURL + "/rest/find/music "), gson.toJson(fp));
+			Response response = rest.post(new URL(PeerManagement.getPeer().getIp() + "/rest/find/music "), gson.toJson(fp));
 			
 			logger.info("response code = "+response.getCode());
 			
