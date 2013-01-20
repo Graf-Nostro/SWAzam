@@ -1,6 +1,41 @@
 SWAzam Assignment2
 ==================
 
+Deploy & run SWAzam
+--------------------
+
+### Compile & deploy the server
+
+```bash
+./scripts/deploy-server.sh
+```
+
+### Compile & deploy 5 peers
+
+This scripts deploys 5 different peers and allows adds some sample files to the media libraries of the peers.
+
+```bash
+./scripts/deploy-peer.sh
+```
+
+### Run the client
+
+```bash
+./scripts/run-client.sh
+```
+
+Management of peers
+-------------------
+
+It is possible to view the songs in the media library of a peer and add and remove songs using this script. When adding media files the files must already be in the library folder.
+
+```bash
+./scripts/peer.sh list florian
+./scripts/peer.sh add florian f01.wav
+./scripts/peer.sh remove florian f01.wav
+```
+
+
 Ant Build Script
 ----------------
 
