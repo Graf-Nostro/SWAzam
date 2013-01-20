@@ -13,12 +13,14 @@ fingerprint-0.1-javadoc.jar
 
 *.war
 SWAzamClient/bin
+SWAzamClient/build
 SWAZamPeer/bin
 SWAzamPeer/build
 SWAzamPeer/WebContent/WEB-INF/classes/
-SWAZamServer/bin
+SWAzamServer/bin
 SWAzamServer/build
+SWAzamServer/WebContent/WEB-INF/classes/
 
 # ignore build properties
-SWAzamPeer/build.properties
+build.properties
 

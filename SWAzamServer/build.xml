@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SWAzamServer" default="war" basedir=".">
+	<property file="build.properties" />
+	<property name="war-file-name" value="${project-name}.war" />
+	<property name="source-directory" value="src" />
+	<property name="web-directory" value="WebContent" />
+	<property name="classes-directory" value="${web-directory}/WEB-INF/classes" />
+	<property name="web-xml-file" value="${web-directory}/WEB-INF/web.xml" />
+	<property name="build-directory" value="./" />
+	<property name="vendor-directory" value="vendor" />
+	
+	<path id="catalina-ant-classpath">
+	    <fileset dir="vendor">
+	        <include name="catalina-ant.jar"/>
+	        <include name="tomcat-coyote.jar"/>
+	        <include name="tomcat-util.jar"/>
+	        <include name="tomcat-juli.jar"/>
+	    </fileset>
+	</path>
+	
+	<path id="classpath">  
+		<fileset dir="${vendor-directory}" includes="*.jar" />
+		<fileset dir="${web-directory}/WEB-INF/lib" includes="*.jar" />
+	</path>  
+	
+	<taskdef name="catalina-deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="catalina-ant-classpath"/>
+	<taskdef name="catalina-list" classname="org.apache.catalina.ant.ListTask" classpathref="catalina-ant-classpath"/>
+	<taskdef name="catalina-reload" classname="org.apache.catalina.ant.ReloadTask" classpathref="catalina-ant-classpath"/>
+	<taskdef name="catalina-findleaks" classname="org.apache.catalina.ant.FindLeaksTask" classpathref="catalina-ant-classpath"/>
+	<taskdef name="catalina-resources" classname="org.apache.catalina.ant.ResourcesTask" classpathref="catalina-ant-classpath"/>
+	<taskdef name="catalina-start" classname="org.apache.catalina.ant.StartTask" classpathref="catalina-ant-classpath"/>
+	<taskdef name="catalina-stop" classname="org.apache.catalina.ant.StopTask" classpathref="catalina-ant-classpath"/>
+	<taskdef name="catalina-undeploy" classname="org.apache.catalina.ant.UndeployTask" classpathref="catalina-ant-classpath"/>
+	
+	<tstamp prefix="build-info">
+		<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
+		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
+		<format property="year-month-day" pattern="yyyy-MM-dd" locale="en" />
+	</tstamp>
+	
+	<target name="clean">    
+		<delete dir="${classes-directory}" />
+		<delete file="${build-directory}/${war-file-name}" />
+	</target> 
+
+	<target name="stop" description="stop application in tomcat">
+		<catalina-stop url="${tomcat-manager-url}" username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}" path="/${project-name}" />
+	</target>
+
+	<target name="start" description="start application in tomcat">
+		<catalina-start url="${tomcat-manager-url}" username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}" path="/${project-name}" />
+	</target>
+	
+	<target name="undeploy" description="undeploy from tomcat">
+		<catalina-undeploy 
+			failonerror="no"
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}"
+		/>
+	</target>
+	
+	<target name="deploy" description="deploy to tomcat">
+		<echo>deploying from client</echo>
+		<catalina-deploy 
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}"
+			war="file:${build-directory}/${war-file-name}"
+		/>
+	</target>
+	
+	<target name="compile">  
+		<mkdir dir="${classes-directory}"/>  
+		<javac includeantruntime="false" srcdir="${source-directory}" destdir="${classes-directory}" classpathref="classpath"/>  
+	</target>  
+	
+	<target name="war" depends="compile">
+		<mkdir dir="${build-directory}" />
+		<delete file="${build-directory}/${war-file-name}" />
+		<war warfile="${build-directory}/${war-file-name}" webxml="${web-xml-file}">
+			<classes dir="${classes-directory}" />
+			<fileset dir="${web-directory}">
+				<!-- Need to exclude it since webxml is an attribute of the war tag above -->
+				<exclude name="WEB-INF/web.xml" />
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${builder}" />
+				<attribute name="Built-On" value="${build-info.current-date}" />
+				<attribute name="Built-At" value="${build-info.current-time}" />
+			</manifest>
+		</war>
+	</target>
+
+	<target name="build-and-deploy" depends="war,undeploy,deploy" />
+	
+</project>

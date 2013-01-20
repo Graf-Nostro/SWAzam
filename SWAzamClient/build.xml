@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SWAzamClient" default="run" basedir=".">
+	<property file="build.properties" />
+	<property name="source-directory" value="src" />
+	<property name="build-directory" value="build" />
+	<property name="classes-directory" value="${build-directory}/classes" />
+	<property name="jar-directory" value="${build-directory}/jar" />
+	<property name="vendor-directory" value="vendor" />
+	<property name="main-class" value="main.tuwien.ac.at.swazam.client.MainClient" />
+	
+	<path id="classpath">  
+		<fileset dir="${vendor-directory}" includes="*.jar" />
+	</path>  
+	
+	<path id="build-classpath">
+		<file file="${vendor-directory}/miglayout15-swing.jar" />
+	</path>
+	
+	<tstamp prefix="build-info">
+		<format property="current-date" pattern="d-MMMM-yyyy" locale="en" />
+		<format property="current-time" pattern="hh:mm:ss a z" locale="en" />
+		<format property="year-month-day" pattern="yyyy-MM-dd" locale="en" />
+	</tstamp>
+	
+	<target name="clean">    
+		<delete dir="${build-directory}"/>  
+		<delete dir="${jar.dir}"/>    
+	</target> 
+	
+	<target name="compile" depends="clean">  
+		<mkdir dir="${classes-directory}"/>  
+		<javac includeantruntime="false" srcdir="${source-directory}" destdir="${classes-directory}" classpathref="classpath" />  
+	</target>
+	
+	<manifestclasspath property="build-classpath-list" jarfile="${jar-directory}/${project-name}.jar">
+		<classpath refid="build-classpath" />
+	</manifestclasspath>
+	
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar-directory}"/>
+		<jar destfile="${jar-directory}/${project-name}.jar" basedir="${classes-directory}">
+		<manifest>
+			<attribute name="Main-Class" value="${main-class}"/>
+			<attribute name="Class-Path" value="${build-classpath-list}"/>
+		</manifest>
+		</jar>
+	</target>
+	
+	<target name="run" depends="jar">
+		<java jar="${jar-directory}/${project-name}.jar" fork="true"/>
+	</target>
+	
+</project>
