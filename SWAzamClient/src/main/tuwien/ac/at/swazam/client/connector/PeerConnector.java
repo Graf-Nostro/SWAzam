@@ -10,6 +10,7 @@ import main.tuwien.ac.at.swazam.client.Fingerprinter;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.client.utils.PeerManagement;
 import main.tuwien.ac.at.swazam.client.utils.PeerRequest;
+import main.tuwien.ac.at.swazam.entity.Peer;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
 
@@ -48,16 +49,18 @@ public class PeerConnector implements IPeerConnector {
 			Gson gson = new Gson();
 			
 			Fingerprint fp = Fingerprinter.getFingerprint(sample);
+			Peer peer = PeerManagement.getPeer();
 			
-			Response response = rest.post(new URL(PeerManagement.getPeer().getIp() + "/rest/find/music "), gson.toJson(fp));
+			String url = "http://" + peer.getIp() + ":" + peer.getPort() + "/SWAzamPeer-" + peer.getName() + "/rest/find/music";
+			Response response = rest.post(new URL(url), gson.toJson(fp));
 			
 			logger.info("response code = "+response.getCode());
 			
-			if (response.getCode() >= 300)
+			if (response.getCode() >= 300) {
 				throw new PeerNotAvailableException();
-			
-			else
+			} else {
 				return true;
+			}
 		} catch (MalformedURLException e) {
 			logger.warning("Invalid URL");
 		} catch (IOException e) {
