@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="SWAzamPeer" default="war" basedir=".">
 	<property file="build.properties" />
+	<property file="tomcat.properties" />
 	<property name="war-file-name" value="${project-name}.war" />
 	<property name="source-directory" value="src" />
 	<property name="web-directory" value="WebContent" />
 	<property name="classes-directory" value="${web-directory}/WEB-INF/classes" />
 	<property name="web-xml-file" value="${web-directory}/WEB-INF/web.xml" />
-	<property name="build-directory" value="./" />
+	<property name="bin-directory" value="bin" />
 	<property name="vendor-directory" value="vendor" />
 	<property name="properties-file" value="tomcat.properties" />
+	<property name="main-class" value="main.tuwien.ac.at.swazam.peer.MainPeer" />
 	
 	<path id="catalina-ant-classpath">
 	    <fileset dir="vendor">
@@ -22,7 +24,11 @@
 	<path id="classpath">  
 		<fileset dir="${vendor-directory}" includes="*.jar" />
 		<fileset dir="${web-directory}/WEB-INF/lib" includes="*.jar" />
-	</path>  
+	</path>
+	
+	<path id="build-classpath">
+		<file file="${vendor-directory}/gson-2.2.2.jar" />
+	</path>
 	
 	<taskdef name="catalina-deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="catalina-ant-classpath"/>
 	<taskdef name="catalina-list" classname="org.apache.catalina.ant.ListTask" classpathref="catalina-ant-classpath"/>
@@ -64,14 +70,114 @@
 		/>
 	</target>
 	
-	<target name="deploy" description="deploy to tomcat">
+	<target name="undeploy-florian">
+		<catalina-undeploy 
+			failonerror="no"
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-florian"
+		/>
+	</target>
+	
+	<target name="undeploy-stefan">
+		<catalina-undeploy 
+			failonerror="no"
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-stefan"
+		/>
+	</target>
+	
+	<target name="undeploy-kung">
+		<catalina-undeploy 
+			failonerror="no"
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-kung"
+		/>
+	</target>
+	
+	<target name="undeploy-andreas">
+		<catalina-undeploy 
+			failonerror="no"
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-andreas"
+		/>
+	</target>
+		
+	<target name="undeploy-adnan">
+		<catalina-undeploy 
+			failonerror="no"
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-adnan"
+		/>
+	</target>
+	
+	<target name="deploy" depends="war, undeploy">
 		<echo>deploying from client</echo>
 		<catalina-deploy 
 			url="${tomcat-manager-url}"
 			username="${tomcat-manager-username}"
 			password="${tomcat-manager-password}"
 			path="/${project-name}"
-			war="file:${build-directory}/${war-file-name}"
+			war="file:${bin-directory}/${war-file-name}"
+		/>
+	</target>
+	
+	<target name="deploy-florian" depends="war, undeploy-florian, run-florian">
+		<catalina-deploy 
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-florian"
+			war="file:${bin-directory}/${war-file-name}"
+		/>
+	</target>
+	
+	<target name="deploy-kung" depends="war, undeploy-kung, run-kung">
+		<catalina-deploy 
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-kung"
+			war="file:${bin-directory}/${war-file-name}"
+		/>
+	</target>
+	
+	<target name="deploy-stefan" depends="war, undeploy-stefan, run-stefan">
+		<catalina-deploy 
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-stefan"
+			war="file:${bin-directory}/${war-file-name}"
+		/>
+	</target>
+	
+	<target name="deploy-andreas" depends="war, undeploy-andreas, run-andreas">
+		<catalina-deploy 
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-andreas"
+			war="file:${bin-directory}/${war-file-name}"
+		/>
+	</target>
+	
+	<target name="deploy-adnan" depends="war, undeploy-adnan, run-adnan">
+		<catalina-deploy 
+			url="${tomcat-manager-url}"
+			username="${tomcat-manager-username}"
+			password="${tomcat-manager-password}"
+			path="/${project-name}-adnan"
+			war="file:${bin-directory}/${war-file-name}"
 		/>
 	</target>
 	
@@ -82,9 +188,9 @@
 	</target>  
 	
 	<target name="war" depends="compile">
-		<mkdir dir="${build-directory}" />
-		<delete file="${build-directory}/${war-file-name}" />
-		<war warfile="${build-directory}/${war-file-name}" webxml="${web-xml-file}">
+		<mkdir dir="${bin-directory}" />
+		<delete file="${bin-directory}/${war-file-name}" />
+		<war warfile="${bin-directory}/${war-file-name}" webxml="${web-xml-file}">
 			<classes dir="${classes-directory}" />
 			<fileset dir="${web-directory}">
 				<!-- Need to exclude it since webxml is an attribute of the war tag above -->
@@ -97,7 +203,77 @@
 			</manifest>
 		</war>
 	</target>
-
-	<target name="build-and-deploy" depends="war,undeploy,deploy" />
+	
+	<manifestclasspath property="build-classpath-list" jarfile="${jar-directory}/${project-name}.jar">
+		<classpath refid="build-classpath" />
+	</manifestclasspath>
+	
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar-directory}"/>
+		<jar destfile="${jar-directory}/${project-name}.jar" basedir="${classes-directory}">
+		<manifest>
+			<attribute name="Main-Class" value="${main-class}"/>
+			<attribute name="Class-Path" value="${build-classpath-list}"/>
+		</manifest>
+		</jar>
+	</target>	
+	
+	<target name="run-florian" depends="jar">
+		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+			<arg value="start" />
+			<arg value="florian" />
+			<arg value="${peer-url}" />
+			<arg value="${peer-port}" />
+			<sysproperty key="server-url" value="${server-url}" />
+			<sysproperty key="library-directory" value="${library-directory}" />
+		</java>
+	</target>
+	
+	<target name="run-kung" depends="jar">
+		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+			<arg value="start" />
+			<arg value="kung" />
+			<arg value="${peer-url}" />
+			<arg value="${peer-port}" />
+			<sysproperty key="server-url" value="${server-url}" />
+			<sysproperty key="library-directory" value="${library-directory}" />
+		</java>
+	</target>
+	
+	<target name="run-stefan" depends="jar">
+		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+			<arg value="start" />
+			<arg value="stefan" />
+			<arg value="${peer-url}" />
+			<arg value="${peer-port}" />
+			<sysproperty key="server-url" value="${server-url}" />
+			<sysproperty key="library-directory" value="${library-directory}" />
+		</java>
+	</target>
+	
+	<target name="run-andreas" depends="jar">
+		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+			<arg value="start" />
+			<arg value="andreas" />
+			<arg value="${peer-url}" />
+			<arg value="${peer-port}" />
+			<sysproperty key="server-url" value="${server-url}" />
+			<sysproperty key="library-directory" value="${library-directory}" />
+		</java>
+	</target>
+	
+	<target name="run-adnan" depends="jar">
+		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+			<arg value="start" />
+			<arg value="adnan" />
+			<arg value="${peer-url}" />
+			<arg value="${peer-port}" />
+			<sysproperty key="server-url" value="${server-url}" />
+			<sysproperty key="library-directory" value="${library-directory}" />
+		</java>
+	</target>
+	
+	<target name="undeploy-all" depends="undeploy-florian, undeploy-kung, undeploy-stefan, undeploy-andreas, undeploy-adnan" />
+	<target name="deploy-all" depends="deploy-florian, deploy-kung, deploy-stefan, deploy-andreas, deploy-adnan" />
 	
 </project>

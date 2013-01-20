@@ -11,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 
 import main.tuwien.ac.at.swazam.peer.util.Peer;
+import main.tuwien.ac.at.swazam.peer.util.SimplePeer;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
 
@@ -68,8 +69,10 @@ public class ServerConnector {
 		RESTUtil rest = new RESTUtil();
 		
 		try {
+			SimplePeer sPeer = new SimplePeer(peer.getName(), peer.getIp(), peer.getPort());
 			Gson gson = new Gson();
-			Response response = rest.put(new URL(serverURL + "/RESTPeerManagement/register"), gson.toJson(peer));
+			Type type = new TypeToken<SimplePeer>(){}.getType();
+			Response response = rest.put(new URL(serverURL + "/RESTPeerManagement/register"), gson.toJson(sPeer, type));
 			if (response.getCode() >= 300) {
 				throw new ServerNotAvailableException();
 			}
