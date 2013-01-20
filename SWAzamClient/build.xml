@@ -47,7 +47,10 @@
 	</target>
 	
 	<target name="run" depends="jar">
-		<java jar="${jar-directory}/${project-name}.jar" fork="true"/>
+		<java jar="${jar-directory}/${project-name}.jar" fork="true">
+			<sysproperty key="server-url" value="${server-url}" />
+			<sysproperty key="library-directory" value="${library-directory}" />
+		</java>
 	</target>
 	
 </project>
