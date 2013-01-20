@@ -1,4 +1,5 @@
 package main.tuwien.ac.at.swazam.server.endpoints.rest;
+
 import javax.servlet.http.HttpServletRequest; 
 import javax.ws.rs.GET; 
 import javax.ws.rs.PUT;
@@ -77,7 +78,6 @@ public class RESTPeerManagement {
 			Gson gson = new Gson();
 			String[] data = gson.fromJson(request, String[].class); 
 			if ( user.checkLogin(data[0], data[1]) ) {
-				peer = gson.fromJson(request, Peer.class);
 				return peerManagement.getRandomPeer();
 			}
 		} catch (Exception e) {
