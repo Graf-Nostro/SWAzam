@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 import com.google.gson.Gson;
@@ -15,8 +17,14 @@ import main.tuwien.ac.at.swazam.peer.util.SimplePeer;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
 
-public class ServerConnector {
-	
+/**
+ * ServerConnector
+ * 
+ * @author Florian Eckerstorfer <florian@eckerstorfer.co>
+ */
+public class ServerConnector
+{
+	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.connector.ServerConnector");
 	private static ServerConnector instance;
 	
 	public static ServerConnector getInstance() {
@@ -83,5 +91,26 @@ public class ServerConnector {
 		}
 		
 		return true;
+	}
+	
+	public Boolean acceptRequest(Peer peer, String songName) throws ServerNotAvailableException {
+		RESTUtil rest = new RESTUtil();
+		String json = "{\"responsename\": \"" + songName + "\", \"name\": \"" + peer.getName() + "\", \"coins\": 1, \"recognizedSong\": true}";
+		Response response;
+		String url = serverURL + "/RESTCoinManagement/acceptrequest";
+		try {
+			response = rest.put(new URL(url), json);
+			if (response.getCode() >= 300) {
+				throw new ServerNotAvailableException();
+			}
+		} catch (MalformedURLException e) {
+			logger.log(Level.SEVERE, "Malformed URL: " + url);
+			e.printStackTrace();
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, "Could not perform request to URL \"" + url + "\"");
+			e.printStackTrace();
+		}
+		
+		return false;
 	}
 }

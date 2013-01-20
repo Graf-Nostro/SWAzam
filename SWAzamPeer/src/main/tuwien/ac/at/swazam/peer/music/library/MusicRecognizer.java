@@ -1,8 +1,12 @@
 package main.tuwien.ac.at.swazam.peer.music.library;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import main.tuwien.ac.at.swazam.peer.MainPeer;
 import main.tuwien.ac.at.swazam.peer.connector.PeerConnector;
 import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
+import main.tuwien.ac.at.swazam.peer.connector.ServerNotAvailableException;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.peer.util.PeerFinder;
 import main.tuwien.ac.at.swazam.peer.util.PeerRegistry;
@@ -16,6 +20,7 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
  */
 public class MusicRecognizer
 {
+	private static Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.peer.music.library.MusicLibrary ");
 	private Peer peer;
 	private Fingerprint fingerprint;
 	private PeerFinder peerFinder;
@@ -45,6 +50,12 @@ public class MusicRecognizer
 				return PeerConnector.getInstance().redirectMatchRequest(peer, fingerprint);
 			}
 		} else {
+			try {
+				ServerConnector.getInstance().acceptRequest(peer, result);
+			} catch (ServerNotAvailableException e) {
+				logger.log(Level.SEVERE, "Could not send acceptrequest request to server.");
+				e.printStackTrace();
+			}
 			return result;
 		}
 	}

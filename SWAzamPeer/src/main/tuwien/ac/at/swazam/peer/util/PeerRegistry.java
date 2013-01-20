@@ -103,7 +103,7 @@ public class PeerRegistry
 			return null;
 		}
 		
-		int index = 0 + (int)(Math.random() * ((peers.size()) + 1));
+		int index = 0 + (int)(Math.random() * ((peers.size()) - 1));
 		return peers.get(index);
 	}
 	
