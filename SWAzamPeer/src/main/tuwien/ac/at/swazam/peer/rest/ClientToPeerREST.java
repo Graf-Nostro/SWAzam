@@ -61,10 +61,10 @@ public class ClientToPeerREST {
 		Peer peer = new Peer("peer2", "localhost", 8080);
 		
 		List<File> songs = new ArrayList<File>();
-		songs.add(new File( PATH + "b01.wav") );
-		songs.add(new File( PATH + "f01small.wav") );
-		songs.add(new File( PATH + "d01.wav") );
-		songs.add(new File( PATH + "f01.wav") );
+		songs.add(new File( "b01.wav") );
+		songs.add(new File( "f01small.wav") );
+		songs.add(new File( "d01.wav") );
+		songs.add(new File( "f01.wav") );
 		
 		Library library = new Library(peer, songs);
 		library.setPath(PATH);

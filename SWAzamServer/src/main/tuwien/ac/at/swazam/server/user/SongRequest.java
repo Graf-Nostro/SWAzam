@@ -11,6 +11,7 @@ public class SongRequest {
 	public static final String COINS_FIELD_NAME = "coins";
 	public static final String RECOGNIZED_FIELD_NAME = "recognizedSong";
 	
+	@SuppressWarnings("unused")
 	@DatabaseField(generatedId=true)
     private int id;
 	
