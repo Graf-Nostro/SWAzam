@@ -21,6 +21,7 @@ public class Library implements ILibrary {
 	private List<File> songs = new ArrayList<File>();
 	
 	private String libPath = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
+	
 	private String libName;
 	
 	public Library(final Peer peer){
