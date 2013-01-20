@@ -7,7 +7,7 @@ import main.tuwien.ac.at.swazam.entity.Peer;
 
 public interface IServerConnector {
 
-	void register(String username, String password) throws RegistrationFailedException;
-	void login(String username, String password) throws LoginFailedException;
+	Boolean register(String username, String password) throws RegistrationFailedException;
+	Boolean login(String username, String password) throws LoginFailedException;
 	Peer askForPeer(String username, String password) throws NoPeerAvailableException;
 }

@@ -15,7 +15,9 @@ import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.IServerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.ServerConnector;
+import main.tuwien.ac.at.swazam.client.exception.LoginFailedException;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
+import main.tuwien.ac.at.swazam.client.exception.RegistrationFailedException;
 import main.tuwien.ac.at.swazam.client.utils.MusicRequestWrapper;
 import main.tuwien.ac.at.swazam.client.utils.PeerManagement;
 import main.tuwien.ac.at.swazam.client.utils.PeerRequestHandler;
@@ -145,6 +147,8 @@ public class ClientUI extends JFrame implements ActionListener {
 		contentPane.add(lblStatus, "cell 0 3,alignx left");
 	
 		
+		btnRegister.addActionListener(this);
+		btnLogin.addActionListener(this);
 		btnRecord.addActionListener(this);
 		btnSubmit.addActionListener(this);
 		
@@ -161,8 +165,54 @@ public class ClientUI extends JFrame implements ActionListener {
 	}
 
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == btnRegister) {
+			if(fdUsername.getText().equals("") || fdPassword.getText().equals("")) {
+				JOptionPane.showMessageDialog(this, "Please fill in both fields", "Registration", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			
+			try {
+				serverConnector.register(fdUsername.getText(), fdPassword.getText());
+				
+				JOptionPane.showMessageDialog(this, "Registration process was successful", "Registration", JOptionPane.INFORMATION_MESSAGE);
+				lblStatus.setText("Registration successful");
+				UserManagement.setUsername(fdUsername.getText());
+				UserManagement.setPassword(fdPassword.getText());
+				
+				
+			} catch (RegistrationFailedException e1) {
+				logger.warning("Registration could not be completed");
+				JOptionPane.showMessageDialog(this, "Registration not successful", "Registration failed", JOptionPane.ERROR_MESSAGE);
+				lblStatus.setText("Registration failed");
+			}
+		}
+		
+		
+		if(e.getSource() == btnLogin) {
+			if(fdUsername.getText().equals("") || fdPassword.getText().equals("")) {
+				JOptionPane.showMessageDialog(this, "Please fill in both fields", "Login", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			
+			try {
+				serverConnector.login(fdUsername.getText(), fdPassword.getText());
+				
+				JOptionPane.showMessageDialog(this, "Login was successful", "Login", JOptionPane.INFORMATION_MESSAGE);
+				lblStatus.setText("Login successful");
+				UserManagement.setUsername(fdUsername.getText());
+				UserManagement.setPassword(fdPassword.getText());
+				
+			} catch (LoginFailedException e1) {
+				logger.warning("Login failed");
+				JOptionPane.showMessageDialog(this, "Login not successful, try again", "Login", JOptionPane.ERROR_MESSAGE);
+				lblStatus.setText("Login failed");
+			}
+		}
+		
 		
 		if(e.getSource() == btnRecord) {
 			int val = fc.showOpenDialog(ClientUI.this);

@@ -47,17 +47,60 @@ public class ServerConnector implements IServerConnector {
 	
 	
 	@Override
-	public void register(String username, String password)
+	public Boolean register(String username, String password)
 			throws RegistrationFailedException {
-		// TODO Auto-generated method stub
 		
+		RESTUtil rest = new RESTUtil();
+		
+		try {
+
+			Response response = rest.post(new URL(System.getProperty("server-url") + "/register?name="+username+"&passwd="+password), "");
+			
+			logger.info("response code = "+response.getCode());
+			logger.info("response msg = "+response.getMessage());
+			logger.info("response body = "+response.getBody());
+			
+			if (response.getCode() >= 300)
+				throw new RegistrationFailedException();
+			
+			else
+				return true;
+			
+		} catch (MalformedURLException e) {
+			logger.warning("Invalid URL");
+		} catch (IOException e) {
+			logger.warning("Error when sending request");
+		}
+		
+		return false;
 	}
 
 	@Override
-	public void login(String username, String password)
+	public Boolean login(String username, String password)
 			throws LoginFailedException {
-		// TODO Auto-generated method stub
-
+		
+		RESTUtil rest = new RESTUtil();
+		
+		try {
+			
+			Response response = rest.post(new URL(System.getProperty("server-url") + "/login?name="+username+"&passwd="+password), "");
+			
+			logger.info("response code = "+response.getCode());
+			logger.info("response msg = "+response.getMessage());
+			logger.info("response body = "+response.getBody());
+			
+			if (response.getCode() >= 300)
+				throw new LoginFailedException();
+			
+			else
+				return true;
+			
+		} catch (MalformedURLException e) {
+			logger.warning("Invalid URL");
+		} catch (IOException e) {
+			logger.warning("Error when sending request");
+		}
+		return false;
 	}
 
 	@Override
@@ -70,28 +113,6 @@ public class ServerConnector implements IServerConnector {
 			String[] arr = new String[2];
 			arr[0] = username;
 			arr[1] = password;
-			
-//			String result = gson.toJson(arr);
-//			String[] data = gson.fromJson(result, String[].class);
-			
-		//	logger.info("data = "+data[0]+" "+data[1]);
-			
-//			String json = "{ 'username':'Andi', 'password':'1234' }";
-//			String data = gson.fromJson(json, String.class);
-//			
-//			logger.info("data = "+data);
-			
-//			Type listType = new TypeToken<List<String>>() {}.getType();
-//			List<String> target = new LinkedList<String>();
-//			target.add(username);
-//			target.add(password);
-			
-//			Gson gson = new Gson();
-//			String json = gson.toJson(target, listType);
-			
-			
-//			logger.info("user = "+target2.get(0));
-//			logger.info("pw = "+target2.get(1));
 			
 			Response response = rest.put(new URL(System.getProperty("server-url") + "/RESTPeerManagement/lookup"), gson.toJson(arr));
 			
