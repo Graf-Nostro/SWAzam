@@ -27,8 +27,16 @@ public class RESTCoinManagement {
 		try {
 			coinManagement = new CoreCoinManagement();
 			Gson gson = new Gson();
-			SongRequest req = gson.fromJson(request, SongRequest.class);
-			coinManagement.addSongRequest(req);
+			String[] req = gson.fromJson(request, String[].class);
+			SongRequest song = new SongRequest();
+			song.setName(req[0]);
+			song.setCoins(Integer.parseInt(req[2]));
+			boolean test = false;
+			if (req[3].equals("true")) {
+				test = true;
+			}
+			song.setRecognizedSong(test);
+			coinManagement.addSongRequest(song);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return Response.created(null).build();

@@ -26,16 +26,17 @@ public class FingerprinterLibraryTest {
 
 	private String PATH = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory");
 	
-	private final String FILE_NAME1 = "j01.wav";
-	private final String FILE_NAME2 = "f01small.wav";
-	private final String FILE_NAME3 = "d01.wav";
-	private final String FILE_NAME4 = "f01.wav";
-	private final String FILE_NAME5 = "b01.wav";
+	private final String FILE_NAME1 = "II - High Winter - 01 - High Winter.wav";
+	private final String FILE_NAME2 = "Leslie - Woods - 05 - Accommodation.wav";
+	private final String FILE_NAME3 = "Verschwundene - MariGGGopa - 01 MariGGGopa.wav";
+	private final String FILE_NAME4 = "Leslie - Woods - 01 - The Good In Each Other.wav";
+	private final String FILE_NAME5 = "PPNG - PPNG2 - 01 - Randy.wav";
 	
 	private Library       library;
 	
 	@Before
 	public void setUp() throws Exception {
+		//setup
 		Peer peer = new Peer("peer2", "localhost", 8080);
 		library = peer.getLibrary();
 		library.addSong(new File(PATH + "/" + FILE_NAME1));

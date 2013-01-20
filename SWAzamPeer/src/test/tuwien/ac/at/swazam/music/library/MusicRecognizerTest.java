@@ -28,8 +28,8 @@ import ac.at.tuwien.infosys.swa.audio.Fingerprint;
  */
 public class MusicRecognizerTest
 {
-	private final String FILE1 = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory") + "/f01.wav";
-	private final String FILE2 = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory") + "/d01.wav";
+	private final String FILE1 = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory") + "/Leslie - Woods - 01 - The Good In Each Other.wav";
+	private final String FILE2 = PropertyReader.getInstance(MainPeer.PROPERTY_FILE).getProperty("library-directory") + "/Verschwundene - MariGGGopa - 01 MariGGGopa.wav";
 	
 	@Before
 	public void setUp() {
