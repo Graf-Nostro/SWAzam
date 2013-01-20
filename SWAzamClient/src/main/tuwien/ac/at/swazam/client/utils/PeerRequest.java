@@ -1,20 +1,19 @@
-package main.tuwien.ac.at.swazam.client.connector;
+package main.tuwien.ac.at.swazam.client.utils;
 
-import main.tuwien.ac.at.swazam.client.utils.ClientUtils;
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
-public class Request {
+public class PeerRequest {
 	
 	private String ip;
 	private int port;
 	private Fingerprint fingerprint;
 	
 	
-	public Request(Fingerprint fp) {
+	public PeerRequest(Fingerprint fp) {
 		this(ClientUtils.getIp(), ClientUtils.getPort(), fp);
 	}
 	
-	public Request(String ip, int port, Fingerprint fp) {
+	public PeerRequest(String ip, int port, Fingerprint fp) {
 		this.ip = ip;
 		this.port = port;
 		this.fingerprint = fp;

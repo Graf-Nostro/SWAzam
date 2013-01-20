@@ -2,10 +2,11 @@ package main.tuwien.ac.at.swazam.client.connector;
 
 import main.tuwien.ac.at.swazam.client.exception.LoginFailedException;
 import main.tuwien.ac.at.swazam.client.exception.RegistrationFailedException;
+import main.tuwien.ac.at.swazam.entity.Peer;
 
 public class ServerConnector implements IServerConnector {
 
-	private String serverURL; 
+	private String serverURL;
 	
 	public ServerConnector() {
 	}
@@ -38,5 +39,12 @@ public class ServerConnector implements IServerConnector {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public Peer askForPeer() {
+		
+		return null;
+	}
+	
 	
 }

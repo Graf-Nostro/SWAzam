@@ -1,8 +1,10 @@
 package main.tuwien.ac.at.swazam.client.connector;
 
+import java.io.File;
+
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 
 public interface IPeerConnector {
 
-	Boolean sendRequest(Request request) throws PeerNotAvailableException;
+	Boolean sendMusicRecognitionRequest(File sample) throws PeerNotAvailableException;
 }
