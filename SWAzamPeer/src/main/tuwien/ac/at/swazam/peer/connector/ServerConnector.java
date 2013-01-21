@@ -94,11 +94,18 @@ public class ServerConnector
 	
 	public Boolean acceptRequest(Peer peer, String songName) throws ServerNotAvailableException {
 		RESTUtil rest = new RESTUtil();
-		String json = "{\"responsename\": \"" + songName + "\", \"name\": \"" + peer.getName() + "\", \"coins\": 1, \"recognizedSong\": true}";
+	//	String json = "{\"responsename\": \"" + songName + "\", \"name\": \"" + peer.getName() + "\", \"coins\": 1, \"recognizedSong\": true}";
+		String[] request = new String[4];
+		request[0] = songName;
+		request[1] = peer.getName();
+		request[2] = "1";
+		request[3] = "true";
+		Gson gson = new Gson();
+		
 		Response response;
 		String url = serverURL + "/RESTCoinManagement/acceptrequest";
 		try {
-			response = rest.put(new URL(url), json);
+			response = rest.put(new URL(url), gson.toJson(request));
 			if (response.getCode() >= 300) {
 				throw new ServerNotAvailableException();
 			}
