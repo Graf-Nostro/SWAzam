@@ -8,8 +8,6 @@ Deploy & run SWAzam
 
 ```bash
 ./scripts/deploy-server.sh
-# or
-# ant build-and-deploy
 ```
 
 You need to visit the web interface (for example http://localhost:8080/SWAzamServer) and register at least one user. A user with username "admin" and password "admin" is required for testing purposes.
@@ -20,16 +18,12 @@ This scripts deploys 5 different peers and allows adds some sample files to the 
 
 ```bash
 ./scripts/deploy-peer.sh
-# or
-# ant deploy-all
 ```
 
 ### Run the client
 
 ```bash
 ./scripts/run-client.sh
-# or
-# ant run
 ```
 
 Management of peers
