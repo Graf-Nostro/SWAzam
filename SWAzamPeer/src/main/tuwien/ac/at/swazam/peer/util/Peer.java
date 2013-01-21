@@ -1,8 +1,5 @@
 package main.tuwien.ac.at.swazam.peer.util;
 
-import java.io.File;
-import java.util.List;
-
 import main.tuwien.ac.at.swazam.peer.music.library.Library;
 
 /**

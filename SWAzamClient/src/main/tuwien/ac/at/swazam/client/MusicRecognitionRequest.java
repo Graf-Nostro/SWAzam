@@ -1,19 +1,17 @@
 package main.tuwien.ac.at.swazam.client;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Logger;
 
-import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
-import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
-import main.tuwien.ac.at.swazam.client.utils.ClientUtils;
 
 public class MusicRecognitionRequest {
 	
+	@SuppressWarnings("unused")
 	private Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.client.MusicRecognitionRequest");
 
+	@SuppressWarnings("unused")
 	private IPeerConnector peerConnector;
 	private File requestFile;
 	

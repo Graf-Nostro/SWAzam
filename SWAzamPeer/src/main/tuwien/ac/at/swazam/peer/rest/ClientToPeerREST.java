@@ -9,13 +9,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.google.gson.Gson;
-
 import main.tuwien.ac.at.swazam.peer.music.library.MusicRecognizer;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.peer.util.PeerCreator;
-
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
+
+import com.google.gson.Gson;
 
 // The class registers its methods for the HTTP GET request using the @GET annotation. 
 // Using the @Produces annotation, it defines that it can deliver several MIME types,

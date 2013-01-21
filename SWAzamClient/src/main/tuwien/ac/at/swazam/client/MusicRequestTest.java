@@ -7,7 +7,6 @@ import java.util.logging.Logger;
 import main.tuwien.ac.at.swazam.client.connector.IPeerConnector;
 import main.tuwien.ac.at.swazam.client.connector.PeerConnector;
 import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
-import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 public class MusicRequestTest {
 

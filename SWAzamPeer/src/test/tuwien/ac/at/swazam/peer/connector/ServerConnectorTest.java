@@ -1,7 +1,8 @@
 package test.tuwien.ac.at.swazam.peer.connector;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
 import main.tuwien.ac.at.swazam.peer.connector.ServerNotAvailableException;
 import main.tuwien.ac.at.swazam.peer.util.Peer;

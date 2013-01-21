@@ -18,9 +18,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.google.gson.Gson;
-
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
+
+import com.google.gson.Gson;
 
 public class FingerprinterLibraryTest {
 

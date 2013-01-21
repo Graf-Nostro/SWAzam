@@ -1,7 +1,6 @@
 package test.tuwien.ac.at.swazam.peer.util;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.peer.util.PeerRegistry;

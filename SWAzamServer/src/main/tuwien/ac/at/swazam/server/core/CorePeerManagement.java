@@ -1,12 +1,5 @@
 package main.tuwien.ac.at.swazam.server.core;
 
-import com.j256.ormlite.dao.CloseableIterator;
-import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
-import com.j256.ormlite.support.ConnectionSource;
-import com.j256.ormlite.table.TableUtils;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +7,13 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import main.tuwien.ac.at.swazam.server.user.Peer;
+
+import com.j256.ormlite.dao.CloseableIterator;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.dao.DaoManager;
+import com.j256.ormlite.jdbc.JdbcPooledConnectionSource;
+import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
 
 public class CorePeerManagement {
 	private final Logger LOG = Logger.getLogger(CorePeerManagement.class.getName());
