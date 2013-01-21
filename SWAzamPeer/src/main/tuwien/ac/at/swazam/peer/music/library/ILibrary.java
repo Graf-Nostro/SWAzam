@@ -7,9 +7,8 @@ import java.util.Map;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import ac.at.tuwien.infosys.swa.audio.Fingerprint;
-
 import main.tuwien.ac.at.swazam.peer.util.Peer;
+import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 public interface ILibrary {
 

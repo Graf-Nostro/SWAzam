@@ -6,13 +6,12 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import ac.at.tuwien.infosys.swa.audio.Fingerprint;
-
-import com.google.gson.Gson;
-
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
+import ac.at.tuwien.infosys.swa.audio.Fingerprint;
+
+import com.google.gson.Gson;
 
 public class PeerConnector {
 	

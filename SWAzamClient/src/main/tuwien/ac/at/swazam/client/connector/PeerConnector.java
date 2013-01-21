@@ -12,7 +12,6 @@ import main.tuwien.ac.at.swazam.client.utils.PeerManagement;
 import main.tuwien.ac.at.swazam.entity.Peer;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
-
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 import com.google.gson.Gson;

@@ -7,10 +7,8 @@ import java.util.logging.Logger;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-
 import main.tuwien.ac.at.swazam.peer.connector.ServerConnector;
 import main.tuwien.ac.at.swazam.peer.connector.ServerNotAvailableException;
-
 import main.tuwien.ac.at.swazam.peer.music.library.Fingerprinter;
 import main.tuwien.ac.at.swazam.peer.music.library.LibrarySerializer;
 import main.tuwien.ac.at.swazam.peer.util.Peer;

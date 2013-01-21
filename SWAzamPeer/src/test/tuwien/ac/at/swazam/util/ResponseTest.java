@@ -1,7 +1,6 @@
 package test.tuwien.ac.at.swazam.util;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
 import main.tuwien.ac.at.swazam.util.Response;
 
 import org.junit.After;

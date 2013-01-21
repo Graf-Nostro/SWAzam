@@ -1,5 +1,9 @@
 package main.tuwien.ac.at.swazam.peer.music.library;
 
+import static main.tuwien.ac.at.swazam.peer.Strings.CLASS_NOT_FOUND;
+import static main.tuwien.ac.at.swazam.peer.Strings.FILE_NOT_FOUND;
+import static main.tuwien.ac.at.swazam.peer.Strings.IO_SERIALIZATION;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -13,8 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import ac.at.tuwien.infosys.swa.audio.Fingerprint;
-
-import static main.tuwien.ac.at.swazam.peer.Strings.*;
 
 /**
  * 

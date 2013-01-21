@@ -1,26 +1,18 @@
 package main.tuwien.ac.at.swazam.client.connector;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.logging.Logger;
 
-import ac.at.tuwien.infosys.swa.audio.Fingerprint;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import main.tuwien.ac.at.swazam.client.Fingerprinter;
 import main.tuwien.ac.at.swazam.client.exception.LoginFailedException;
 import main.tuwien.ac.at.swazam.client.exception.NoPeerAvailableException;
-import main.tuwien.ac.at.swazam.client.exception.PeerNotAvailableException;
 import main.tuwien.ac.at.swazam.client.exception.RegistrationFailedException;
 import main.tuwien.ac.at.swazam.entity.Peer;
 import main.tuwien.ac.at.swazam.util.RESTUtil;
 import main.tuwien.ac.at.swazam.util.Response;
+
+import com.google.gson.Gson;
 
 public class ServerConnector implements IServerConnector {
 

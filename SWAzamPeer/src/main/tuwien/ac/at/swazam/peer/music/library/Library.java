@@ -9,11 +9,10 @@ import java.util.Map;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import ac.at.tuwien.infosys.swa.audio.Fingerprint;
-
 import main.tuwien.ac.at.swazam.peer.MainPeer;
 import main.tuwien.ac.at.swazam.peer.util.Peer;
 import main.tuwien.ac.at.swazam.util.PropertyReader;
+import ac.at.tuwien.infosys.swa.audio.Fingerprint;
 
 /**
  * 

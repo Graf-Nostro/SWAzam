@@ -6,6 +6,7 @@ import main.tuwien.ac.at.swazam.entity.Peer;
 
 public class PeerManagement {
 
+	@SuppressWarnings("unused")
 	private Logger logger = Logger.getLogger("main.tuwien.ac.at.swazam.client.utils.PeerManagement");
 	
 	private static Peer peer;

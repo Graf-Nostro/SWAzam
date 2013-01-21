@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.logging.Logger;
 
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import main.tuwien.ac.at.swazam.client.ui.ClientUI;
 
 
