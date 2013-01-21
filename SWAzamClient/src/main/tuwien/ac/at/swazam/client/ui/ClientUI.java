@@ -245,9 +245,11 @@ public class ClientUI extends JFrame implements ActionListener {
 				}
 				
 				if(result != null) {
+					result = result.substring(0, result.lastIndexOf(".wav"));
+					
 					JOptionPane.showMessageDialog(this, "Request processed successfully", "Processing request", JOptionPane.INFORMATION_MESSAGE);
 					lblStatus.setText("Request sent");
-					taResults.setText(taResults.getText() + " " + result + "\n");
+					taResults.setText(taResults.getText() + " Song: " + result + "\n");
 				}
 				
 				else {
